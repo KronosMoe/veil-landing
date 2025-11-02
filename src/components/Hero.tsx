@@ -301,7 +301,7 @@ export default function Hero() {
 
   return (
     <div className="flex h-screen items-center justify-center">
-      <div className="flex w-full flex-col items-center gap-2 rounded-sm border border-zinc-700 p-4 shadow-2xl select-none sm:w-md">
+      <div className="flex mx-2 sm:mx-0 w-full flex-col items-center gap-2 rounded-sm border border-zinc-700 p-4 shadow-2xl select-none sm:w-md">
         <div className="relative h-24 w-full overflow-hidden rounded-sm bg-gray-100 shadow-lg">
           <div className="absolute inset-0 rounded-sm bg-[#628E79]" />
           <canvas ref={canvasRef} className="absolute inset-0 h-full w-full" style={{ imageRendering: 'pixelated' }} />
