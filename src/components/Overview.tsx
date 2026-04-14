@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react'
 import { animate, stagger } from 'animejs'
-import { Shield, Users, Zap } from 'lucide-react'
+import { Shield, Users, Monitor } from 'lucide-react'
 
 export default function Overview() {
   const sectionRef = useRef<HTMLDivElement>(null)
@@ -38,8 +38,7 @@ export default function Overview() {
         <div className="overview-heading mb-12 text-center opacity-0">
           <h2 className="mb-3 text-3xl font-bold">What is Veil?</h2>
           <p className="mx-auto max-w-xl text-zinc-400">
-            A team communication platform where privacy isn&apos;t an afterthought — it&apos;s the foundation. Chat,
-            call, and collaborate without compromising your data.
+            A place for your team to talk, call, and work together — where private conversations actually stay private.
           </p>
         </div>
         <div className="grid gap-4 sm:grid-cols-3">
@@ -47,17 +46,17 @@ export default function Overview() {
             {
               icon: <Shield size={24} />,
               title: 'Private by Default',
-              desc: 'End-to-end encryption on every message, call, and file. Your data stays yours.',
+              desc: 'Your direct messages are locked so only you and the person you\u2019re chatting with can read them. Not even we can see them.',
             },
             {
               icon: <Users size={24} />,
               title: 'Built for Teams',
-              desc: 'Channels, threads, and roles designed for real collaboration at any scale.',
+              desc: 'Create workspaces with channels for different topics, projects, or teams. Everything stays organized and easy to find.',
             },
             {
-              icon: <Zap size={24} />,
-              title: 'Fast & Lightweight',
-              desc: 'Snappy performance without the bloat. Works great even on slower connections.',
+              icon: <Monitor size={24} />,
+              title: 'Works Everywhere',
+              desc: 'Use Veil right in your browser, or download the desktop app for extras like multi-tab and better screen sharing.',
             },
           ].map((item) => (
             <div

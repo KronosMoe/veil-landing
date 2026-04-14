@@ -21,8 +21,8 @@ export default function Footer() {
           <a href="#faq" className="transition-colors hover:text-zinc-300">
             FAQ
           </a>
-          <a href="#contact" className="transition-colors hover:text-zinc-300">
-            Contact
+          <a href="mailto:support@veil.in.th" className="transition-colors hover:text-zinc-300">
+            Support
           </a>
         </nav>
         <p className="text-xs text-zinc-600">&copy; {new Date().getFullYear()} Veil</p>

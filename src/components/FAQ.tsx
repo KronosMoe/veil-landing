@@ -4,28 +4,32 @@ import { ChevronDown } from 'lucide-react'
 
 const faqs = [
   {
-    q: 'Is Veil really end-to-end encrypted?',
-    a: 'Yes. Every message, call, and file transfer uses E2E encryption. Not even Veil servers can read your data.',
+    q: 'How is Veil different from Slack or Discord?',
+    a: 'Veil gives you channels, voice calls, video, screen sharing, and whiteboards — just like the tools you already know. The difference is that your private conversations are actually private. We don\u2019t read your messages, sell your data, or show you ads.',
   },
   {
-    q: 'Can I self-host Veil?',
-    a: 'Absolutely. Our Enterprise plan includes full self-hosting support with Docker and Kubernetes deployment guides.',
+    q: 'What do you mean by "private messages"?',
+    a: 'Your direct messages are locked so only you and the person you\u2019re talking to can read them. Not us, not anyone else. Think of it like passing a sealed note that only the other person can open.',
   },
   {
-    q: 'What happens to my data if I cancel?',
-    a: 'Your data is yours. You can export everything before cancelling. After cancellation, data is permanently deleted from our servers within 30 days.',
+    q: 'Is Veil really free?',
+    a: 'Yes. Everything you see on this page is free to use — no catch, no time limit. We may add paid plans with higher limits down the road, but there will always be a free option.',
   },
   {
-    q: 'Does Veil work on mobile?',
-    a: 'Veil works on all modern browsers and we have native apps for iOS and Android in development.',
+    q: 'Do I need to install anything?',
+    a: 'Nope. Veil works right in your browser. If you want extras like multi-tab support and better screen sharing, there\u2019s a desktop app you can download too.',
   },
   {
-    q: 'How does Veil compare to Slack or Discord?',
-    a: 'Veil offers similar collaboration features but with privacy as the core principle. No ads, no data mining, no third-party tracking.',
+    q: 'What can I do in a workspace?',
+    a: 'A workspace is your team\u2019s home base. Inside it, you can create text channels to chat, voice channels to talk, and whiteboard channels to draw and brainstorm together.',
   },
   {
-    q: 'Is there a free tier?',
-    a: 'Yes. The Free plan supports up to 10 members with encrypted messaging and voice calls — no credit card required.',
+    q: 'Is there a mobile app?',
+    a: 'Not yet, but it\u2019s on our list. For now, you can use Veil through your phone\u2019s browser.',
+  },
+  {
+    q: 'Who is Veil for?',
+    a: 'Anyone who wants a clean, private space to talk with their team — whether you\u2019re a startup, a student group, a side project, or a department at a bigger company.',
   },
 ]
 
@@ -49,7 +53,7 @@ function FAQItem({ q, a }: { q: string; a: string }) {
   }
 
   return (
-    <div className="faq-item border-b border-zinc-800 opacity-0">
+    <div className="faq-item border-b border-zinc-800 opacity-0 last:border-b-0">
       <button onClick={toggle} className="flex w-full items-center justify-between py-4 text-left">
         <span className="pr-4 text-sm font-medium">{q}</span>
         <ChevronDown
@@ -98,8 +102,8 @@ export default function FAQ() {
     <section ref={sectionRef} id="faq" className="px-4 py-24 sm:px-8">
       <div className="mx-auto max-w-2xl">
         <div className="faq-heading mb-10 text-center opacity-0">
-          <h2 className="mb-3 text-3xl font-bold">FAQ</h2>
-          <p className="text-zinc-400">Common questions about Veil.</p>
+          <h2 className="mb-3 text-3xl font-bold">Questions & Answers</h2>
+          <p className="text-zinc-400">Things people usually ask about Veil.</p>
         </div>
         <div className="rounded-sm border border-zinc-700 bg-zinc-900 px-6">
           {faqs.map((faq) => (

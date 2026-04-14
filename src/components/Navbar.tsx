@@ -29,7 +29,7 @@ export default function Navbar() {
           ))}
           <a href="https://app.veil.in.th">
             <button className="rounded-sm border border-zinc-700 bg-zinc-800 px-4 py-1.5 text-sm transition-all hover:bg-zinc-700">
-              Open App <span className="font-bold text-orange-500">(in dev)</span>
+              Open App
             </button>
           </a>
         </div>
@@ -53,7 +53,7 @@ export default function Navbar() {
           ))}
           <a href="https://app.veil.in.th" className="mt-2 block">
             <button className="w-full rounded-sm border border-zinc-700 bg-zinc-800 px-4 py-2 text-sm transition-all hover:bg-zinc-700">
-              Open App <span className="font-bold text-orange-500">(in dev)</span>
+              Open App
             </button>
           </a>
         </div>
