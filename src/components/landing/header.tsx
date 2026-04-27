@@ -59,8 +59,6 @@ export function Header() {
               href="https://app.veil.in.th"
               target="_blank"
               rel="noopener noreferrer"
-              whileHover={{ scale: 1.03 }}
-              whileTap={{ scale: 0.97 }}
             >
               <Button variant="solid" color="primary">
                 Launch App
