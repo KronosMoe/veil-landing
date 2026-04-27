@@ -1,24 +1,24 @@
-import Hero from './components/Hero'
-import Navbar from './components/Navbar'
-import Overview from './components/Overview'
-import Features from './components/Features'
-import Pricing from './components/Pricing'
-import FAQ from './components/FAQ'
-import Contact from './components/Contact'
-import Footer from './components/Footer'
+import { About } from './components/landing/about'
+import { Contact } from './components/landing/contact'
+import { FAQ } from './components/landing/faq'
+import { Features } from './components/landing/features'
+import { Footer } from './components/landing/footer'
+import { Header } from './components/landing/header'
+import { Hero } from './components/landing/hero'
+import { Legal } from './components/landing/legal'
 
 function App() {
   return (
-    <div className="bg-[#111111] text-white">
-      <Navbar />
+    <main className="min-h-screen bg-[#111111]">
+      <Header />
       <Hero />
-      <Overview />
+      <About />
       <Features />
-      <Pricing />
       <FAQ />
       <Contact />
+      <Legal />
       <Footer />
-    </div>
+    </main>
   )
 }
 
