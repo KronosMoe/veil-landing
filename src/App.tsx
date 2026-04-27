@@ -1,24 +1,18 @@
-import { About } from './components/landing/about'
-import { Contact } from './components/landing/contact'
-import { FAQ } from './components/landing/faq'
-import { Features } from './components/landing/features'
-import { Footer } from './components/landing/footer'
-import { Header } from './components/landing/header'
-import { Hero } from './components/landing/hero'
-import { Legal } from './components/landing/legal'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import PrivacyPolicy from './pages/PrivacyPolicy'
+import Home from './pages/Home'
+import { BASE_PATH, PRIVACY_POLICY_PATH, TERM_OF_SERVICE_PATH } from './constants/routes'
+import TermsOfService from './pages/TermsOfService'
 
 function App() {
   return (
-    <main className="min-h-screen bg-[#111111]">
-      <Header />
-      <Hero />
-      <About />
-      <Features />
-      <FAQ />
-      <Contact />
-      <Legal />
-      <Footer />
-    </main>
+    <BrowserRouter>
+      <Routes>
+        <Route path={BASE_PATH} element={<Home />} />
+        <Route path={TERM_OF_SERVICE_PATH} element={<TermsOfService />} />
+        <Route path={PRIVACY_POLICY_PATH} element={<PrivacyPolicy />} />
+      </Routes>
+    </BrowserRouter>
   )
 }
 
