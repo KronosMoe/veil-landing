@@ -319,7 +319,7 @@ export default function Hero() {
         </div>
         <div className="flex w-full items-center justify-between">
           <h1 className="font-bold">Veil</h1>
-          <p className="text-sm text-gray-400">Under Construction</p>
+          <p className="text-sm text-gray-400">Coming Soon</p>
         </div>
       </div>
     </div>

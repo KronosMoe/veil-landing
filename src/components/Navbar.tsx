@@ -7,11 +7,12 @@ export default function Navbar() {
         <img src={logo} alt="logo" className="pointer-events-none size-8" />
         <span className="text-lg font-bold">Veil</span>
       </div>
-      <a href="https://app.veil.in.th">
+      <div/>
+      {/* <a href="https://app.veil.in.th">
         <button className="rounded-sm border border-zinc-700 bg-zinc-800 px-4 py-2 text-sm transition-all hover:bg-zinc-700">
           Open App <span className="font-bold text-orange-500">(in dev)</span>
         </button>
-      </a>
+      </a> */}
     </div>
   )
 }
