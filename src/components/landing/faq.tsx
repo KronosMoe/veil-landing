@@ -114,7 +114,7 @@ export function FAQ() {
           initial={{ opacity: 0, y: 24 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7, delay: 0.15 }}
-          className="rounded-sm px-5 py-2 sm:px-8"
+          className="skeu-card rounded-lg px-5 py-2 sm:px-8"
         >
           {faqs.map((faq, index) => (
             <FAQItem

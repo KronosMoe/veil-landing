@@ -36,11 +36,11 @@ export function About() {
             </p>
 
             <div className="grid grid-cols-2 gap-4">
-              <div className="skeu-card rounded-sm p-5 transition-all duration-200">
+              <div className="skeu-card rounded-lg p-5 transition-all duration-200">
                 <div className="mb-1 text-3xl font-bold text-[#f3701e]">100%</div>
                 <div className="text-sm text-gray-400">Private &amp; Encrypted</div>
               </div>
-              <div className="skeu-card rounded-sm p-5 transition-all duration-200">
+              <div className="skeu-card rounded-lg p-5 transition-all duration-200">
                 <div className="mb-1 text-3xl font-bold text-[#f3701e]">Free</div>
                 <div className="text-sm text-gray-400">No Hidden Costs</div>
               </div>
@@ -73,7 +73,7 @@ export function About() {
               />
 
               {/* Center card */}
-              <div className="absolute inset-16 flex items-center justify-center rounded-sm">
+              <div className="absolute inset-16 flex items-center justify-center rounded-lg">
                 <VeilLogo
                   className="h-24 w-24 drop-shadow-[0_0_20px_rgba(243,112,30,0.25)] sm:h-28 sm:w-28"
                   color="#ffffff"
@@ -84,7 +84,7 @@ export function About() {
               <motion.div
                 animate={{ y: [-8, 8, -8] }}
                 transition={{ duration: 4, repeat: Infinity }}
-                className="absolute top-6 right-4 flex h-14 w-14 items-center justify-center rounded-sm"
+                className="absolute top-6 right-4 flex h-14 w-14 items-center justify-center rounded-lg"
               >
                 <LockIcon className="h-6 w-6 text-[#f3701e]" />
               </motion.div>
@@ -92,7 +92,7 @@ export function About() {
               <motion.div
                 animate={{ y: [8, -8, 8] }}
                 transition={{ duration: 5, repeat: Infinity }}
-                className="absolute bottom-10 left-2 flex h-14 w-14 items-center justify-center rounded-sm"
+                className="absolute bottom-10 left-2 flex h-14 w-14 items-center justify-center rounded-lg"
               >
                 <MessageIcon className="h-6 w-6 text-[#f3701e]" />
               </motion.div>
@@ -100,7 +100,7 @@ export function About() {
               <motion.div
                 animate={{ y: [-6, 6, -6] }}
                 transition={{ duration: 3.5, repeat: Infinity }}
-                className="absolute right-10 bottom-6 flex h-14 w-14 items-center justify-center rounded-sm"
+                className="absolute right-10 bottom-6 flex h-14 w-14 items-center justify-center rounded-lg"
               >
                 <ShieldIcon className="h-6 w-6 text-[#f3701e]" />
               </motion.div>

@@ -122,10 +122,10 @@ export function Features() {
             <motion.div
               key={index}
               variants={itemVariants}
-              className="skeu-card group relative cursor-default rounded-sm p-6 transition-all duration-300"
+              className="skeu-card group relative cursor-default rounded-lg p-6 transition-all duration-300"
             >
               <div
-                className="mb-4 flex h-11 w-11 items-center justify-center rounded-sm border border-[#f3701e]/15 bg-[#f3701e]/10 transition-colors group-hover:bg-[#f3701e]/20"
+                className="mb-4 flex h-11 w-11 items-center justify-center rounded-lg border border-[#f3701e]/15 bg-[#f3701e]/10 transition-colors group-hover:bg-[#f3701e]/20"
                 style={{ boxShadow: '0 1px 0 rgba(255,255,255,0.05) inset, 0 2px 6px rgba(0,0,0,0.35)' }}
               >
                 <feature.icon className="h-5 w-5 text-[#f3701e]" />

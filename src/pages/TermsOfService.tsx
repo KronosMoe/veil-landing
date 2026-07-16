@@ -77,7 +77,7 @@ export default function TermsOfService() {
         <VeilLogo className="mx-auto mb-10 h-10 w-10" color="#ffffff" />
         <Link
           to={BASE_PATH}
-          className="skeu-btn-ghost mb-8 inline-flex items-center gap-2 rounded-sm text-sm text-gray-500 transition-colors hover:text-white"
+          className="skeu-btn-ghost mb-8 inline-flex items-center gap-2 rounded-lg text-sm text-gray-500 transition-colors hover:text-white"
         >
           <ArrowLeft className="h-4 w-4" />
           Back to Home

@@ -48,10 +48,10 @@ export function Contact() {
         >
           <a
             href="mailto:support@veil.in.th"
-            className="group flex items-center gap-3 rounded-sm border border-gray-700 p-2 transition-all duration-150 hover:bg-gray-950"
+            className="group skeuo-raised flex items-center gap-3 rounded-lg border border-black/60 bg-gradient-to-b from-gray-800 to-gray-900 p-2 transition-all duration-150 hover:skeuo-inset hover:from-gray-900 hover:to-gray-950 active:translate-y-px"
           >
             <div
-              className="flex h-9 w-9 items-center justify-center rounded-sm border border-[#f3701e]/15 bg-[#f3701e]/10"
+              className="flex h-9 w-9 items-center justify-center rounded-lg border border-[#f3701e]/15 bg-[#f3701e]/10"
               style={{ boxShadow: '0 1px 0 rgba(255,255,255,0.05) inset, 0 2px 6px rgba(0,0,0,0.35)' }}
             >
               <MailIcon className="h-4 w-4 text-[#f3701e]" />

@@ -110,7 +110,7 @@ export function Hero() {
         <motion.div
           animate={{ y: [0, 8, 0] }}
           transition={{ repeat: Infinity, duration: 1.6 }}
-          className="flex h-10 w-6 items-start justify-center rounded-sm border border-[#2e2e2e] p-2"
+          className="flex h-10 w-6 items-start justify-center rounded-lg border border-[#2e2e2e] p-2"
         >
           <motion.div className="h-1.5 w-1.5 rounded-full bg-[#f3701e]" />
         </motion.div>

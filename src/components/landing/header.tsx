@@ -29,7 +29,7 @@ export function Header() {
       animate={{ y: 0 }}
       transition={{ duration: 0.5 }}
       className={`fixed top-0 right-0 left-0 z-50 transition-all duration-300 ${
-        isScrolled ? 'bg-[#111111]/70 backdrop-blur-md' : 'bg-transparent'
+        isScrolled ? 'skeuo-header border-b border-black/60 bg-gradient-to-b from-gray-900/90 to-gray-950/90 backdrop-blur-md' : 'bg-transparent'
       }`}
     >
       <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
