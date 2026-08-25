@@ -44,3 +44,12 @@ link to `https://app.veil.in.th`; sign-in happens entirely in that app.
 - Prettier: no semicolons, single quotes, 120 char line width, Tailwind class sorting plugin
 - ESLint enforces: no console, no nested ternaries, no negated conditions, require-await, prefer-const
 - Components use default exports with function declarations
+
+## Claude Code tooling
+
+`.claude/` is committed. Two hooks run automatically: prettier on every edited
+file, and a guard rejecting `npm`/`yarn`/`bun` installs since this repo is
+pnpm-only.
+
+Unlike `veil`, `pnpm build` here runs `tsc -b` first, so a type error does fail
+the build.
