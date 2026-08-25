@@ -16,14 +16,27 @@ Veil landing page — a single-page marketing/landing site for the Veil product 
 ## Tech Stack
 
 - **React 19** + **TypeScript** + **Vite 7**
-- **Tailwind CSS v4** (via `@tailwindcss/vite` plugin, imported in `src/index.css`)
-- **lucide-react** for icons
-- **anime.js** available for animations
+- **react-router-dom** for routing
+- **Tailwind CSS v4** (via `@tailwindcss/vite` plugin, imported in `src/global.css`, which also pulls in `src/styles/root.css`)
+- **framer-motion** for animations, **lucide-react** for icons
 - **pnpm** as package manager
 
 ## Architecture
 
-Single-page app with no routing. `src/App.tsx` composes `Navbar` and `Hero` components. The Hero component includes a custom canvas-based pixel text animation (scrolling marquee with mosaic blur effect).
+Three routes, defined in `src/App.tsx` with `BrowserRouter`; path constants live
+in `src/constants/routes.ts`.
+
+- `/` → `src/pages/Home.tsx`, which composes the section components from
+  `src/components/landing/` in order: Header, Hero, About, Features, FAQ,
+  Contact, Footer.
+- `/terms-of-service` and `/privacy-policy` → static legal pages.
+
+Because these are real routes rather than hash fragments, the host has to serve
+`index.html` for unknown paths — a plain static host without an SPA fallback
+will 404 on a direct link to `/privacy-policy`.
+
+There is no auth and no API client here. Every call to action is an outbound
+link to `https://app.veil.in.th`; sign-in happens entirely in that app.
 
 ## Code Style
 
