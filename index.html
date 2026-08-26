@@ -1,33 +1,102 @@
 <!doctype html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Veil</title>
+    <title>Veil — Encrypted chat, calls and whiteboards for your team</title>
+    <meta
+      name="description"
+      content="Veil is a free workspace for teams: encrypted messaging, voice and video calls, whiteboards and shared to-dos. Messages are encrypted in your browser. No ads, no trackers."
+    />
+    <link rel="canonical" href="https://veil.in.th/" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <meta name="author" content="Veil" />
 
-  <link rel="icon" type="image/png" href="/favicon/favicon-96x96.png" sizes="96x96" />
-  <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
-  <link rel="shortcut icon" href="/favicon/favicon.ico" />
-  <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
-  <meta name="apple-mobile-web-app-title" content="Veil" />
-  <link rel="manifest" href="/favicon/site.webmanifest" />
+    <meta name="theme-color" content="#f1f1f1" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#111111" media="(prefers-color-scheme: dark)" />
 
-  <meta property="og:title" content="Veil">
-  <meta property="og:description" content="Build for teams. Designed for privacy">
-  <meta property="og:image" content="/thumbnail/thumbnail.png">
-  <meta property="og:url" content="https://veil.in.th">
-  <meta property="og:type" content="website">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
-  <meta name="twitter:card" content="">
-  <meta name="twitter:title" content="Veil">
-  <meta name="twitter:description" content="Build for teams. Designed for privacy">
-  <meta name="twitter:image" content="/thumbnail/thumbnail.png">
-</head>
+    <link rel="icon" type="image/png" href="/favicon/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
+    <link rel="shortcut icon" href="/favicon/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="Veil" />
+    <link rel="manifest" href="/favicon/site.webmanifest" />
 
-<body>
-  <div id="root"></div>
-  <script type="module" src="/src/main.tsx"></script>
-</body>
+    <meta property="og:site_name" content="Veil" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:title" content="Veil — Encrypted chat, calls and whiteboards for your team" />
+    <meta
+      property="og:description"
+      content="A free workspace for teams: encrypted messaging, calls, whiteboards and shared to-dos. Sealed in your browser. No ads, no trackers."
+    />
+    <meta property="og:url" content="https://veil.in.th/" />
+    <meta property="og:image" content="https://veil.in.th/thumbnail/thumbnail.png" />
+    <meta property="og:image:alt" content="The Veil workspace, showing encrypted channels and a call in progress." />
 
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Veil — Encrypted chat, calls and whiteboards for your team" />
+    <meta
+      name="twitter:description"
+      content="A free workspace for teams: encrypted messaging, calls, whiteboards and shared to-dos. Sealed in your browser. No ads, no trackers."
+    />
+    <meta name="twitter:image" content="https://veil.in.th/thumbnail/thumbnail.png" />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Organization",
+            "@id": "https://veil.in.th/#organization",
+            "name": "Veil",
+            "url": "https://veil.in.th/",
+            "logo": "https://veil.in.th/favicon/web-app-manifest-512x512.png",
+            "email": "support@veil.in.th"
+          },
+          {
+            "@type": "WebSite",
+            "@id": "https://veil.in.th/#website",
+            "url": "https://veil.in.th/",
+            "name": "Veil",
+            "publisher": { "@id": "https://veil.in.th/#organization" }
+          },
+          {
+            "@type": "SoftwareApplication",
+            "name": "Veil",
+            "url": "https://veil.in.th/",
+            "applicationCategory": "CommunicationApplication",
+            "operatingSystem": "Web, macOS, Windows, Linux",
+            "description": "A free workspace for teams: encrypted messaging, voice and video calls, whiteboards and shared to-dos.",
+            "publisher": { "@id": "https://veil.in.th/#organization" },
+            "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+          }
+        ]
+      }
+    </script>
+
+    <script>
+      // Decide the theme before first paint so there is no white flash on a dark
+      // machine (or the reverse). src/lib/theme.ts reads this class back.
+      ;(function () {
+        try {
+          var stored = localStorage.getItem('veil-theme')
+          var dark = stored === 'dark' || (!stored && window.matchMedia('(prefers-color-scheme: dark)').matches)
+          document.documentElement.classList.toggle('dark', dark)
+          document.documentElement.style.colorScheme = dark ? 'dark' : 'light'
+        } catch (e) {
+          document.documentElement.classList.add('dark')
+        }
+      })()
+    </script>
+  </head>
+
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
 </html>

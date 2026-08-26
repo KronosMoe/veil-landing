@@ -1,131 +1,83 @@
-import { useState, useRef } from 'react'
-import { motion, AnimatePresence, useInView } from 'framer-motion'
-import { ChevronDownIcon } from './icons'
+import { useState } from 'react'
+import { AnimatePresence, motion } from 'framer-motion'
+import { ChevronDown } from 'lucide-react'
+import { faqs } from '@/content/site'
+import { Reveal, RevealGroup } from '../motion/reveal'
+import { revealItemVariants } from '@/lib/motion-variants'
 
-const faqs = [
-  {
-    question: 'Is Veil really free to use?',
-    answer:
-      'Yes — Veil is completely free. All core features are included at no cost. We believe everyone deserves secure and private communication without a price tag.',
-  },
-  {
-    question: 'How does end-to-end encryption work?',
-    answer:
-      "Your messages are scrambled on your device before being sent. Only you and your intended recipients hold the keys to unscramble them. Even we can't read your conversations.",
-  },
-  {
-    question: 'Can I use Veil for my team or community?',
-    answer:
-      'Absolutely. Veil workspaces are designed for groups of any size. Spin up channels for different topics, use voice chat for meetings, and stay organized — all in one place.',
-  },
-  {
-    question: 'Are file attachments encrypted too?',
-    answer:
-      'Yes. Every file you send through Veil — images, documents, audio — is encrypted with the same protection as your messages.',
-  },
-  {
-    question: 'How does the personal Drive work?',
-    answer:
-      "When you receive a file attachment in a chat or workspace, you can choose to save it to your personal Drive by clicking the save button. Files don't go to your Drive automatically — you decide what to keep. Your Drive is organized by source, so you always know where something came from.",
-  },
-  {
-    question: 'What platforms is Veil available on?',
-    answer:
-      'Veil is available only on Windows, Linux, and macOS. We are working hard to expand to more platforms in the future.',
-  },
-  {
-    question: 'Can I customize how Veil looks?',
-    answer:
-      'Yes! You can pick a custom accent color that applies throughout the whole interface. Make Veil feel like yours.',
-  },
-  {
-    question: 'Who can see messages in a workspace?',
-    answer:
-      'Only members of your workspace who have access to a specific channel can see its messages. You control who joins and what they can access.',
-  },
-]
-
-function FAQItem({
-  question,
-  answer,
-  isOpen,
-  onClick,
-}: {
-  question: string
-  answer: string
-  isOpen: boolean
-  onClick: () => void
-}) {
-  return (
-    <div className="border-b border-[#2a2a2a] last:border-0">
-      <button
-        onClick={onClick}
-        className="group flex w-full items-center justify-between py-5 text-left"
-        aria-expanded={isOpen}
-      >
-        <span className="pr-4 text-sm font-medium text-white transition-colors group-hover:text-[#f3701e] sm:text-base">
-          {question}
-        </span>
-        <motion.div animate={{ rotate: isOpen ? 180 : 0 }} transition={{ duration: 0.2 }} className="shrink-0">
-          <ChevronDownIcon className="h-4 w-4 text-gray-500 transition-colors group-hover:text-[#f3701e]" />
-        </motion.div>
-      </button>
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: 'auto', opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.25 }}
-            className="overflow-hidden"
-          >
-            <p className="pb-5 text-sm leading-relaxed text-gray-400">{answer}</p>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </div>
-  )
-}
+// Mirrors the visible copy above, so the rich result and the page never drift.
+const faqJsonLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((faq) => ({
+    '@type': 'Question',
+    name: faq.question,
+    acceptedAnswer: { '@type': 'Answer', text: faq.answer },
+  })),
+})
 
 export function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(0)
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: '-100px' })
 
   return (
-    <section id="faq" className="relative py-24 sm:py-32">
-      <div className="absolute inset-0 bg-[#111111]" />
+    <section id="faq" className="relative py-20 sm:py-28">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: faqJsonLd }} />
 
-      <div ref={ref} className="relative z-10 mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7 }}
-          className="mb-12 text-center"
-        >
-          <span className="mb-4 inline-block text-xl font-semibold tracking-wider text-[#f3701e] uppercase">FAQ</span>
-          <h2 className="mb-4 text-3xl font-bold text-balance text-white sm:text-4xl lg:text-5xl">Got Questions?</h2>
-          <p className="text-base leading-relaxed text-gray-400">
-            Here are answers to the most common things people ask about Veil.
-          </p>
-        </motion.div>
+      <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+        <Reveal className="text-center">
+          <span className="text-primary-500 text-xs font-semibold tracking-[0.2em] uppercase">Questions</span>
+          <h2 className="mt-3 text-3xl font-bold text-balance text-gray-900 sm:text-4xl dark:text-white">
+            The things people ask us first
+          </h2>
+        </Reveal>
 
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7, delay: 0.15 }}
-          className="skeu-card rounded-lg px-5 py-2 sm:px-8"
-        >
-          {faqs.map((faq, index) => (
-            <FAQItem
-              key={index}
-              question={faq.question}
-              answer={faq.answer}
-              isOpen={openIndex === index}
-              onClick={() => setOpenIndex(openIndex === index ? null : index)}
-            />
-          ))}
-        </motion.div>
+        <RevealGroup className="veil-card mt-10 px-5 sm:px-7" stagger={0.05} amount={0.1}>
+          {faqs.map((faq, index) => {
+            const isOpen = openIndex === index
+
+            return (
+              <motion.div
+                key={faq.question}
+                variants={revealItemVariants}
+                className="border-b border-black/10 last:border-0 dark:border-white/5"
+              >
+                <h3>
+                  <button
+                    type="button"
+                    onClick={() => setOpenIndex(isOpen ? null : index)}
+                    aria-expanded={isOpen}
+                    className="group flex w-full cursor-pointer items-center justify-between gap-4 py-5 text-left"
+                  >
+                    <span className="group-hover:text-primary-500 text-sm font-semibold text-gray-900 transition-colors sm:text-base dark:text-white">
+                      {faq.question}
+                    </span>
+                    <motion.span
+                      animate={{ rotate: isOpen ? 180 : 0 }}
+                      transition={{ duration: 0.2 }}
+                      className="veil-card flex h-7 w-7 shrink-0 items-center justify-center rounded-lg"
+                    >
+                      <ChevronDown className="h-3.5 w-3.5 text-gray-500" />
+                    </motion.span>
+                  </button>
+                </h3>
+
+                <AnimatePresence initial={false}>
+                  {isOpen && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: 'auto', opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.25 }}
+                      className="overflow-hidden"
+                    >
+                      <p className="pb-5 text-sm leading-relaxed text-gray-600 dark:text-gray-400">{faq.answer}</p>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </motion.div>
+            )
+          })}
+        </RevealGroup>
       </div>
     </section>
   )

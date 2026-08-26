@@ -34,19 +34,31 @@ surface in the browser overlay as you edit.
 ## Stack
 
 React 19, TypeScript, Vite 7, Tailwind CSS v4 (through `@tailwindcss/vite`,
-imported from `src/index.css`), and `lucide-react` for icons.
+imported from `src/global.css`), and `lucide-react` for icons.
 
 ## Layout
 
 ```
 src/
-  App.tsx        the page — sections are composed here
-  components/    section components
-  assets/        logo and imagery
+  App.tsx        routes
+  content/       all marketing copy, as data
+  pages/         Home, the two legal pages, 404
+  components/
+    landing/     the homepage sections
+    legal/       shared shell for the legal pages
+    ui/          button, theme toggle
+  lib/           theme store, markdown subset renderer
+  global.css     design tokens + composite surfaces (.veil-*)
 public/
   favicon/       full favicon set + site.webmanifest
   thumbnail/     Open Graph preview image
+  robots.txt     + sitemap.xml
 ```
+
+Copy is edited in `src/content/site.ts`, not in the components.
+
+The site is light/dark. The theme is a `.dark` class on `<html>`, chosen before
+first paint by an inline script in `index.html` and stored under `veil-theme`.
 
 ## Deploying
 

@@ -1,120 +1,99 @@
-import { motion } from 'framer-motion'
-import { VeilLogo } from './veil-logo'
-import { ArrowRightIcon, LockIcon } from './icons'
+import { useRef } from 'react'
+import { motion, useReducedMotion, useScroll, useSpring, useTransform } from 'framer-motion'
+import { ArrowRight, BadgeCheck, EyeOff, Lock } from 'lucide-react'
+import { APP_URL } from '@/content/site'
 import Button from '../ui/button'
+import { AppPreview } from './app-preview'
+
+const badges = [
+  { icon: Lock, label: 'Encrypted before it leaves your device' },
+  { icon: BadgeCheck, label: 'Free, with nothing held back' },
+  { icon: EyeOff, label: 'No ads, no trackers' },
+]
 
 export function Hero() {
+  const sectionRef = useRef<HTMLElement>(null)
+  const shouldReduceMotion = useReducedMotion()
+
+  // The preview settles back and drifts up as the hero leaves — the page feels
+  // like it has depth without anything jumping around.
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ['start start', 'end start'],
+  })
+  const smooth = useSpring(scrollYProgress, { stiffness: 100, damping: 30, restDelta: 0.001 })
+  const previewY = useTransform(smooth, [0, 1], [0, -70])
+  const previewScale = useTransform(smooth, [0, 1], [1, 0.94])
+  const previewOpacity = useTransform(smooth, [0, 0.85], [1, 0.35])
+  const auroraY = useTransform(smooth, [0, 1], [0, 90])
+
   return (
-    <section className="relative flex min-h-screen items-center justify-center overflow-hidden pt-16">
-      {/* Background Effects */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-1/4 left-1/4 h-96 w-96 rounded-full bg-[#f3701e]/8 blur-3xl" />
-        <div className="absolute right-1/4 bottom-1/4 h-80 w-80 rounded-full bg-[#f3701e]/4 blur-3xl" />
-      </div>
-
-      {/* Subtle grid */}
-      <div
-        className="absolute inset-0 opacity-[0.025]"
-        style={{
-          backgroundImage: `linear-gradient(#ffffff 1px, transparent 1px), linear-gradient(90deg, #ffffff 1px, transparent 1px)`,
-          backgroundSize: '60px 60px',
-        }}
-      />
-
-      <div className="relative z-10 mx-auto max-w-7xl px-4 text-center sm:px-6 lg:px-8">
-        {/* Logo */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.85 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.7, delay: 0.15 }}
-          className="mb-8"
-        >
-          <VeilLogo
-            className="mx-auto h-24 w-24 drop-shadow-[0_0_32px_rgba(243,112,30,0.3)] sm:h-32 sm:w-32"
-            color="#ffffff"
-          />
-        </motion.div>
-
-        <motion.h1
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.25 }}
-          className="mb-6 text-4xl leading-tight font-bold text-balance text-white sm:text-5xl md:text-6xl lg:text-7xl"
-        >
-          Connect Behind the <span className="text-[#f3701e]">Veil</span>
-        </motion.h1>
-
-        <motion.p
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.35 }}
-          className="mx-auto mb-10 max-w-2xl text-lg leading-relaxed text-pretty text-gray-400 sm:text-xl"
-        >
-          Your all-in-one platform for secure messaging, team workspaces, and private collaboration. Chat freely, stay
-          organized, and keep every conversation protected.
-        </motion.p>
-
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.45 }}
-          className="flex flex-col items-center justify-center gap-4 sm:flex-row"
-        >
-          <motion.a
-            href="https://app.veil.in.th"
-            target="_blank"
-            rel="noopener noreferrer"
-            whileHover={{ scale: 1.04 }}
-            whileTap={{ scale: 0.96 }}
-          >
-            <Button color="primary" variant="solid" size='xl'>
-              Get Started Free <ArrowRightIcon className="h-5 w-5 transition-transform group-hover:translate-x-1" />
-            </Button>
-          </motion.a>
-          <motion.a href="#features" whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.96 }}>
-            <Button color="secondary" variant="surface" size='xl'>
-              Explore Features
-            </Button>
-          </motion.a>
-        </motion.div>
-
-        {/* Trust indicators */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1, delay: 0.9 }}
-          className="mt-14 flex items-center justify-center gap-8 text-sm text-gray-500"
-        >
-          <div className="flex items-center gap-2">
-            <LockIcon className="h-4 w-4 text-[#f3701e]" />
-            <span>Encrypted Messages</span>
-          </div>
-          <div className="hidden h-4 w-px bg-[#2e2e2e] sm:block" />
-          <div className="hidden items-center gap-2 sm:flex">
-            <span>Completely Free</span>
-          </div>
-          <div className="hidden h-4 w-px bg-[#2e2e2e] sm:block" />
-          <div className="hidden items-center gap-2 sm:flex">
-            <span>No Ads</span>
-          </div>
-        </motion.div>
-      </div>
-
-      {/* Scroll indicator */}
+    <section id="top" ref={sectionRef} className="relative overflow-hidden pt-28 pb-16 sm:pt-36 sm:pb-24">
       <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.4 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2"
-      >
+        style={shouldReduceMotion ? undefined : { y: auroraY }}
+        className="veil-aurora pointer-events-none absolute inset-0"
+        aria-hidden="true"
+      />
+      <div className="veil-grid pointer-events-none absolute inset-0 opacity-40" aria-hidden="true" />
+
+      <div className="relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <motion.div
-          animate={{ y: [0, 8, 0] }}
-          transition={{ repeat: Infinity, duration: 1.6 }}
-          className="flex h-10 w-6 items-start justify-center rounded-lg border border-[#2e2e2e] p-2"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="mx-auto max-w-3xl text-center"
         >
-          <motion.div className="h-1.5 w-1.5 rounded-full bg-[#f3701e]" />
+          <span className="veil-chip inline-flex items-center gap-2 px-3.5 py-1.5 text-xs font-medium text-gray-600 dark:text-gray-400">
+            <span className="bg-primary-500 h-1.5 w-1.5 rounded-full" />
+            Free, encrypted, and open to everyone
+          </span>
+
+          <h1 className="mt-6 text-4xl leading-[1.1] font-bold text-balance text-gray-900 sm:text-5xl lg:text-6xl dark:text-white">
+            Everything you say here <span className="veil-gradient-text">stays here</span>
+          </h1>
+
+          <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-pretty text-gray-600 sm:text-lg dark:text-gray-400">
+            Veil is a workspace for teams and communities — chat, calls, whiteboards and to-do boards in one place.
+            Every message is end-to-end encrypted, sealed on your device before it is ever sent.
+          </p>
+
+          <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
+            <a href={APP_URL} target="_blank" rel="noopener noreferrer" className="group w-full sm:w-auto">
+              <Button color="primary" variant="solid" size="xl" className="w-full sm:w-auto">
+                Start free
+                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+              </Button>
+            </a>
+            <a href="#features" className="w-full sm:w-auto">
+              <Button color="secondary" variant="surface" size="xl" className="w-full sm:w-auto">
+                See what is inside
+              </Button>
+            </a>
+          </div>
+
+          <ul className="mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs text-gray-500">
+            {badges.map(({ icon: Icon, label }) => (
+              <li key={label} className="flex items-center gap-1.5">
+                <Icon className="text-primary-500 h-3.5 w-3.5" />
+                {label}
+              </li>
+            ))}
+          </ul>
         </motion.div>
-      </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 32 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.2 }}
+          className="mx-auto mt-14 max-w-4xl"
+        >
+          <motion.div
+            style={shouldReduceMotion ? undefined : { y: previewY, scale: previewScale, opacity: previewOpacity }}
+          >
+            <AppPreview />
+          </motion.div>
+        </motion.div>
+      </div>
     </section>
   )
 }

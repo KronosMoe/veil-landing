@@ -1,43 +1,39 @@
 import { Link } from 'react-router-dom'
-import { VeilLogo } from './veil-logo'
+import { APP_URL, SUPPORT_EMAIL } from '@/content/site'
 import { BASE_PATH, PRIVACY_POLICY_PATH, TERM_OF_SERVICE_PATH } from '@/constants/routes'
+import ThemeToggle from '../ui/theme-toggle'
+import { VeilLogo } from './veil-logo'
+
+const linkStyles = 'text-xs text-gray-500 transition-colors hover:text-primary-500'
 
 export function Footer() {
-  const currentYear = new Date().getFullYear()
-
   return (
-    <footer className="border-t border-[#1a1a1a] bg-[#0d0d0d] py-8">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col items-center justify-between gap-4 sm:flex-row">
+    <footer className="veil-well mx-4 mb-4 rounded-2xl px-6 py-8 sm:mx-6 lg:mx-8">
+      <div className="mx-auto flex max-w-6xl flex-col items-center gap-6 md:flex-row md:justify-between">
+        <div className="flex flex-col items-center gap-2 md:items-start">
           <Link to={BASE_PATH} className="flex items-center gap-2">
-            <VeilLogo className="h-5 w-5" color="#ffffff" />
-            <span className="text-sm font-semibold text-white">Veil</span>
+            <VeilLogo className="h-5 w-5 text-gray-900 dark:text-white" color="currentColor" />
+            <span className="text-sm font-bold text-gray-900 dark:text-white">Veil</span>
           </Link>
+          <p className="text-xs text-gray-500">
+            &copy; {new Date().getFullYear()} Veil. Private communication, free for everyone.
+          </p>
+        </div>
 
-          <p className="text-xs text-gray-600">&copy; {currentYear} Veil. All rights reserved.</p>
-
-          <div className="flex items-center gap-5">
-            <Link to={TERM_OF_SERVICE_PATH} className="text-xs text-gray-500 transition-colors hover:text-[#f3701e]">
-              Terms of Service
-            </Link>
-            <Link to={PRIVACY_POLICY_PATH} className="text-xs text-gray-500 transition-colors hover:text-[#f3701e]">
-              Privacy Policy
-            </Link>
-            <a
-              href="mailto:support@veil.in.th"
-              className="text-xs text-gray-500 transition-colors hover:text-[#f3701e]"
-            >
-              support@veil.in.th
-            </a>
-            <a
-              href="https://app.veil.in.th"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-xs text-gray-500 transition-colors hover:text-[#f3701e]"
-            >
-              Launch App
-            </a>
-          </div>
+        <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2">
+          <Link to={TERM_OF_SERVICE_PATH} className={linkStyles}>
+            Terms of Service
+          </Link>
+          <Link to={PRIVACY_POLICY_PATH} className={linkStyles}>
+            Privacy Policy
+          </Link>
+          <a href={`mailto:${SUPPORT_EMAIL}`} className={linkStyles}>
+            {SUPPORT_EMAIL}
+          </a>
+          <a href={APP_URL} target="_blank" rel="noopener noreferrer" className={linkStyles}>
+            Open Veil
+          </a>
+          <ThemeToggle />
         </div>
       </div>
     </footer>
