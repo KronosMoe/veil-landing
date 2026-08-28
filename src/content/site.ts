@@ -1,6 +1,8 @@
 import {
   Bookmark,
+  Building2,
   CheckSquare,
+  Gift,
   Hash,
   Highlighter,
   Megaphone,
@@ -8,8 +10,10 @@ import {
   MonitorSmartphone,
   Palette,
   Presentation,
+  Server,
   ShieldCheck,
   Sparkles,
+  Users,
   Volume2,
   type LucideIcon,
 } from 'lucide-react'
@@ -21,6 +25,7 @@ export const navLinks = [
   { href: '#showcase', label: 'Tour' },
   { href: '#features', label: 'Features' },
   { href: '#security', label: 'Security' },
+  { href: '#pricing', label: 'Plans' },
   { href: '#faq', label: 'FAQ' },
 ]
 
@@ -219,11 +224,104 @@ export const guarantees = [
   'No ads, no ad networks, no third-party trackers — and nothing sold, ever',
 ]
 
+export type Plan = {
+  icon: LucideIcon
+  name: string
+  price: string
+  /** Sits under the price. Short enough for a card. */
+  cadence: string
+  tagline: string
+  benefits: string[]
+  /** The thing we would rather say out loud than have someone find out later. */
+  caveat?: string
+  cta: { label: string; href: string }
+  /** The one card the row leans towards. */
+  featured?: boolean
+}
+
+/**
+ * Mirrors the four workspace licences the app offers, cheapest first. Nothing
+ * Veil ships today sits behind a licence — the paid tiers add capabilities that
+ * do not exist yet, so a free workspace never loses anything it already had.
+ */
+export const plans: Plan[] = [
+  {
+    icon: Gift,
+    name: 'Free',
+    price: 'Free',
+    cadence: 'forever',
+    tagline: 'Everything Veil ships today, for as long as you want it.',
+    benefits: [
+      'Text, voice, whiteboard, to-do, announcement and Q&A channels',
+      'Messages encrypted on your device before they are sent',
+      'Voice and video calls with screen sharing',
+      'Unlimited members and message history',
+    ],
+    cta: { label: 'Create your workspace', href: APP_URL },
+  },
+  {
+    icon: Users,
+    name: 'Team',
+    price: 'Paid',
+    cadence: 'pricing not announced',
+    tagline: 'For teams that have to answer to someone.',
+    benefits: [
+      'Everything in Free',
+      'Single sign-on for your members',
+      'Audit log export',
+      'Custom workspace branding',
+      'Priority support',
+    ],
+    caveat:
+      'Billing is not live yet. Registering interest — here or from your workspace settings — costs nothing and charges nothing.',
+    cta: {
+      label: 'Register interest',
+      href: `mailto:${SUPPORT_EMAIL}?subject=${encodeURIComponent('Team licence interest')}`,
+    },
+    featured: true,
+  },
+  {
+    icon: Building2,
+    name: 'Enterprise',
+    price: 'Talk to us',
+    cadence: 'custom terms',
+    tagline: 'For organisations with procurement, and a security questionnaire.',
+    benefits: ['Everything in Team', 'Compliance reports', 'A named contact at Veil', 'Custom terms and invoicing'],
+    cta: {
+      label: `Email ${SUPPORT_EMAIL}`,
+      href: `mailto:${SUPPORT_EMAIL}?subject=${encodeURIComponent('Enterprise licence enquiry')}`,
+    },
+  },
+  {
+    icon: Server,
+    name: 'Self-hosted',
+    price: 'Free',
+    cadence: 'you run it',
+    tagline: 'Every feature unlocked, on infrastructure you own.',
+    benefits: [
+      'Everything in Enterprise, at no cost',
+      'Your database, your storage, your network',
+      'Upgrade on your own schedule',
+    ],
+    caveat:
+      'You deploy and maintain the services yourself — Postgres, RabbitMQ, Redis and the Veil backend. There is no Veil SLA on a deployment you run.',
+    cta: {
+      label: 'Ask about self-hosting',
+      href: `mailto:${SUPPORT_EMAIL}?subject=${encodeURIComponent('Self-hosted deployment')}`,
+    },
+  },
+]
+
 export const faqs = [
   {
     question: 'Is Veil really free?',
     answer:
-      'Yes. Every feature on this page is free, and there is no paid tier waiting to take them away. Veil is free because we are not selling ads, and we are not selling you.',
+      'Yes. Every feature on this page is on the free plan, with no card, no trial clock and no ads. The paid plans we are building add things the free plan has never had — single sign-on, audit log export, compliance reports — so nothing you use today moves behind a paywall.',
+  },
+  {
+    question: 'What are the plans, then?',
+    answer:
+      'Every workspace starts on Free and stays there unless its owner asks for something else. Team adds administrative features for teams that answer to someone, and is not billable yet. Enterprise is a conversation with us about custom terms. Self-hosted unlocks everything at no cost on infrastructure you run and maintain yourself.',
   },
   {
     question: 'What does end-to-end encrypted mean here?',

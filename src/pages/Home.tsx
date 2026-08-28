@@ -5,6 +5,7 @@ import { Features } from '@/components/landing/features'
 import { Footer } from '@/components/landing/footer'
 import { Header } from '@/components/landing/header'
 import { Hero } from '@/components/landing/hero'
+import { Pricing } from '@/components/landing/pricing'
 import { Security } from '@/components/landing/security'
 import { Showcase } from '@/components/landing/showcase'
 
@@ -22,6 +23,7 @@ export default function Home() {
         <Showcase />
         <Features />
         <Security />
+        <Pricing />
         <FAQ />
         <CallToAction />
       </main>

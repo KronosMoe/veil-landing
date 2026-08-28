@@ -7,7 +7,7 @@ import { AppPreview } from './app-preview'
 
 const badges = [
   { icon: Lock, label: 'Encrypted before it leaves your device' },
-  { icon: BadgeCheck, label: 'Free, with nothing held back' },
+  { icon: BadgeCheck, label: 'Free forever, no card needed' },
   { icon: EyeOff, label: 'No ads, no trackers' },
 ]
 

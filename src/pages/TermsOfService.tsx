@@ -14,7 +14,7 @@ If you disagree with something here, the honest answer is not to use Veil — bu
 
 Veil is a communication service: workspaces containing text, voice, whiteboard, to-do, announcement and Q&A channels, plus direct and group messages, calls, and a personal space for files you choose to save. It runs in the browser, as an installed web app and as a desktop app for macOS, Windows and Linux.
 
-Veil is free. There is no paid tier, no trial that expires and nothing to enter a card for.
+Veil is free to use. Every workspace starts on the free plan, which carries every feature we ship today, with no trial that expires and nothing to enter a card for. A workspace owner may ask us for a Team or Enterprise licence, or run a self-hosted deployment under a licence that costs nothing. None of those licences is billable yet: no workspace can be charged today, and asking for one neither creates a payment obligation nor changes these terms.
 
 ### 3. Your account
 
@@ -93,13 +93,13 @@ export default function TermsOfService() {
       title="Terms of Service"
       description="The agreement between you and Veil, in plain English: what the service is, what your account is responsible for, what you may not do, and what we owe each other under Thai law."
       path={TERM_OF_SERVICE_PATH}
-      lastUpdated="26 August 2026"
+      lastUpdated="28 August 2026"
       content={content}
       summary={
         <>
           <p>
-            Veil is free, you must be 13 or older, and what you create stays yours. We only take the permission needed
-            to store your content and deliver it to the people you sent it to.
+            Veil is free to use, you must be 13 or older, and what you create stays yours. We only take the permission
+            needed to store your content and deliver it to the people you sent it to.
           </p>
           <p>
             Do not use Veil for anything unlawful, for harassment, or for breaking into other people&apos;s accounts.
