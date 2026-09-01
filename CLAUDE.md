@@ -113,3 +113,17 @@ pnpm-only.
 
 Unlike `veil`, `pnpm build` here runs `tsc -b` first, so a type error does fail
 the build.
+
+## Agent skills
+
+### Issue tracker
+
+Issues are tracked in this repository's GitHub project. See `docs/agents/issue-tracker.md`.
+
+### Triage labels
+
+Agent workflows use the default five-label triage vocabulary. See `docs/agents/triage-labels.md`.
+
+### Domain docs
+
+Domain documentation uses a single-context layout. See `docs/agents/domain.md`.
