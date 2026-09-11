@@ -1,20 +1,17 @@
-/**
- * Surfaces lifted from the app so the two products read as one. Sources:
- * `Sidebar/index.tsx`, `ProfileLayout.tsx`, `surface.variants.ts`
- * (`pageHeaderStyles`), `SortableChannelRow.tsx` and `MessageReactions.tsx`.
- * Change these only when the app changes.
- */
-export const railStyles =
-  'border-r border-gray-200 bg-linear-to-b from-gray-50 to-gray-100 dark:border-black/60 dark:from-gray-800 dark:to-gray-900'
+/** Preview surfaces matched to veil@30602b0: ui/sidebar, ProfileLayout,
+ * surface.variants, SortableChannelRow, and button.variants. */
+export const railStyles = 'skeuo-header border-r border-gray-200 bg-gray-100 dark:border-black/60 dark:bg-gray-900'
 
-export const panelStyles =
-  'border-r border-gray-300 bg-gradient-to-b from-gray-100 to-gray-200 dark:border-black/60 dark:from-gray-900 dark:to-gray-950'
+export const panelStyles = 'border-r border-gray-300 bg-gray-100 dark:border-black/60 dark:bg-gray-900'
 
 export const headerStyles =
-  'skeuo-header relative z-10 border-b border-gray-300 bg-gradient-to-b from-gray-100 to-gray-200 dark:border-black/60 dark:from-gray-900 dark:to-gray-950'
+  'skeuo-header relative z-10 flex h-11 shrink-0 items-center border-b border-gray-300 bg-gray-100 text-sm dark:border-black/60 dark:bg-gray-900'
 
 export const activeRowStyles =
-  'bg-gray-200/80 font-semibold text-black shadow-[inset_0_2px_4px_rgba(0,0,0,0.15)] dark:bg-gray-800/80 dark:text-white dark:shadow-[inset_0_2px_4px_rgba(0,0,0,0.6)]'
+  'skeuo-tray border border-black/10 bg-gray-300/70 font-semibold text-gray-900 dark:border-black/50 dark:bg-gray-800/80 dark:text-white'
 
 export const raisedControlStyles =
-  'skeuo-raised border border-black/20 bg-gradient-to-b from-white to-gray-200 dark:border-black/60 dark:from-gray-700 dark:to-gray-900'
+  'skeuo-raised rounded-sm border border-black/15 bg-gray-100 dark:border-black/40 dark:bg-gray-800'
+
+export const toolbarStyles =
+  'flex shrink-0 items-center justify-between gap-2 border-b border-gray-200 bg-gray-100/60 px-3 py-1.5 dark:border-gray-800 dark:bg-gray-950/40'

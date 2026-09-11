@@ -1,3 +1,5 @@
+import { transitionTheme } from './theme-transition'
+
 export type Theme = 'light' | 'dark'
 
 export const THEME_STORAGE_KEY = 'veil-theme'
@@ -37,7 +39,7 @@ export function applyTheme(theme: Theme) {
 }
 
 export function setTheme(theme: Theme) {
-  applyTheme(theme)
+  transitionTheme(theme === 'dark', false, () => listeners.forEach((listener) => listener()))
   try {
     localStorage.setItem(THEME_STORAGE_KEY, theme)
   } catch {
@@ -57,7 +59,7 @@ export function subscribeToTheme(listener: () => void) {
   const media = window.matchMedia('(prefers-color-scheme: dark)')
   const onSystemChange = () => {
     if (readStoredTheme()) return
-    applyTheme(prefersDark() ? 'dark' : 'light')
+    transitionTheme(prefersDark(), false, listener)
     listener()
   }
   media.addEventListener('change', onSystemChange)

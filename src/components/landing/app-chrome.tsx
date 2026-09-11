@@ -1,11 +1,12 @@
 import type { ReactNode } from 'react'
-import { Lock, Send, type LucideIcon } from 'lucide-react'
-import { headerStyles, raisedControlStyles } from '@/lib/app-surfaces'
+import { File, Info, PanelRightOpen, Pin, Plus, Sticker, Users, type LucideIcon } from 'lucide-react'
+import { headerStyles } from '@/lib/app-surfaces'
+import '@/styles/app-preview.css'
 
 const pillBaseStyles = 'flex items-center gap-1.5 rounded-full border px-2 py-0.5'
 
 const pillIdleStyles =
-  'skeuo-raised border-black/20 bg-gray-100 text-black dark:border-black/60 dark:bg-gray-900 dark:text-white'
+  'skeuo-raised border-black/15 bg-gray-100 text-gray-900 dark:border-black/60 dark:bg-gray-900 dark:text-white'
 
 const pillReactedStyles =
   'skeuo-pressed border-blue-500/50 bg-blue-500/15 text-blue-600 dark:border-blue-400/50 dark:bg-blue-500/20 dark:text-blue-300'
@@ -39,7 +40,7 @@ type MessageRowProps = {
 }
 
 /**
- * One row of a channel, matching `TextChannel/message/MessageItem.tsx` —
+ * One row of a channel, matching `ChatChannel/message/MessageItem.tsx` —
  * the 40px rounded-square avatar, the bold sender, the muted timestamp, the
  * 15px/22px body, and the reaction pills underneath. Consecutive messages from
  * one person drop the header exactly as the app groups them.
@@ -48,12 +49,12 @@ export function MessageRow({ initials, name, time, children, showHeader = true, 
   return (
     <div className={showHeader ? 'mt-2' : 'mt-0'}>
       <div
-        className={`group relative mx-2 flex items-start space-x-3 rounded-lg px-2 hover:bg-gray-100 dark:hover:bg-gray-900 ${
+        className={`group relative mx-2 flex items-start space-x-3 rounded-sm px-2 hover:bg-gray-100 dark:hover:bg-gray-900 ${
           showHeader ? 'py-[4px]' : ''
         }`}
       >
         {showHeader ? (
-          <span className="skeuo-raised flex size-10 shrink-0 items-center justify-center rounded-lg bg-gradient-to-b from-white to-gray-200 text-xs font-bold text-gray-700 dark:from-gray-700 dark:to-gray-900 dark:text-gray-300">
+          <span className="skeuo-raised flex size-10 shrink-0 items-center justify-center rounded-sm bg-gray-200 text-xs font-bold text-gray-700 dark:bg-gray-700 dark:text-gray-300">
             {initials}
           </span>
         ) : (
@@ -63,7 +64,7 @@ export function MessageRow({ initials, name, time, children, showHeader = true, 
         <div className="min-w-0 flex-1">
           {showHeader && (
             <div className="flex items-center space-x-2">
-              <span className="font-bold text-black dark:text-gray-200">{name}</span>
+              <span className="font-bold text-gray-900 dark:text-gray-200">{name}</span>
               <span className="text-xs text-gray-400">{time}</span>
             </div>
           )}
@@ -93,27 +94,61 @@ export function MessageRow({ initials, name, time, children, showHeader = true, 
   )
 }
 
-/** The recessed message box at the bottom of a channel. */
+/** Single-row composer matched to utils/message/MessageInput. */
 export function Composer({ placeholder }: { placeholder: string }) {
   return (
-    <div className="p-3 pt-0">
-      <div className="skeuo-inset flex items-center justify-between gap-2 rounded-lg border border-black/20 bg-gray-100 px-3 py-2.5 dark:border-black/60 dark:bg-gray-900">
-        <span className="text-sm text-gray-500">{placeholder}</span>
-        <Send size={14} className="text-primary-500 shrink-0" />
+    <div className="shrink-0 p-2">
+      <div className="skeuo-inset flex min-w-0 items-center gap-3 rounded-sm border border-black/30 bg-gray-100 px-3 py-3 dark:border-black/60 dark:bg-gray-900">
+        <Plus size={17} className="shrink-0 text-gray-500" />
+        <span className="min-w-0 flex-1 truncate text-xs text-gray-500">{placeholder}</span>
+        <Sticker size={17} className="shrink-0 text-gray-500" />
       </div>
     </div>
   )
 }
 
-/** The badge the app shows in a channel header once a key is in place. */
-export function EncryptedBadge() {
+export function ChatActions() {
   return (
-    <span
-      className={`${raisedControlStyles} flex shrink-0 items-center gap-1.5 rounded-lg px-2 py-1 text-[10px] font-medium text-gray-600 dark:text-gray-400`}
-    >
-      <Lock size={11} className="text-primary-500" />
-      End-to-end encrypted
-    </span>
+    <div className="preview-toolbar-actions" aria-label="Chat tools preview">
+      <span title="Threads">
+        <PanelRightOpen size={15} />
+      </span>
+      <span title="Pins">
+        <Pin size={15} />
+      </span>
+      <span className="preview-secondary-action" title="Attachments">
+        <File size={15} />
+      </span>
+      <span title="Members">
+        <Users size={15} />
+      </span>
+    </div>
+  )
+}
+
+export function ChannelHeader({
+  icon: Icon,
+  name,
+  meta,
+  action,
+}: {
+  icon: LucideIcon
+  name: string
+  meta?: string
+  action?: ReactNode
+}) {
+  return (
+    <div className={`${headerStyles} gap-2 px-3`}>
+      <Icon size={14} className="shrink-0 text-gray-600 dark:text-gray-300" />
+      <span className="truncate text-sm font-semibold text-gray-900 dark:text-white">{name}</span>
+      <Info size={12} className="shrink-0 text-gray-500" />
+      {meta && (
+        <span className="preview-secondary-action hidden truncate text-[10px] text-gray-500 sm:inline">{meta}</span>
+      )}
+      <div className="ml-auto flex shrink-0 items-center gap-2">
+        {action ?? <Users size={16} className="text-gray-500" />}
+      </div>
+    </div>
   )
 }
 
@@ -134,16 +169,11 @@ export function AppFrame({
   className?: string
 }) {
   return (
-    <div className="veil-card skeuo-plate flex h-full flex-col overflow-hidden rounded-2xl p-1.5">
+    <div className="app-preview veil-card skeuo-plate flex h-full flex-col overflow-hidden rounded-sm">
       <div
-        className={`flex min-h-0 flex-1 flex-col overflow-hidden rounded-xl bg-gray-50 dark:bg-gray-950 ${className ?? ''}`}
+        className={`preview-canvas flex min-h-0 flex-1 flex-col overflow-hidden rounded-sm bg-gray-50 dark:bg-gray-950 ${className ?? ''}`}
       >
-        <div className={`flex shrink-0 items-center gap-2 px-3 py-2.5 ${headerStyles}`}>
-          <Icon size={16} className="shrink-0 text-gray-500" />
-          <span className="truncate text-sm font-bold text-black dark:text-white">{name}</span>
-          {meta && <span className="hidden truncate text-xs text-gray-500 sm:inline">{meta}</span>}
-          <span className="ml-auto flex items-center gap-2">{action ?? <EncryptedBadge />}</span>
-        </div>
+        <ChannelHeader icon={Icon} name={name} meta={meta} action={action} />
         {children}
       </div>
     </div>

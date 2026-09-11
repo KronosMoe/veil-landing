@@ -1,11 +1,11 @@
-import { useEffect, type ReactNode } from 'react'
+import { useEffect, useState, type ReactNode } from 'react'
 import { Link } from 'react-router-dom'
-import { ArrowLeft } from 'lucide-react'
+import { motion } from 'framer-motion'
+import { ArrowDown, ArrowUpRight, FileText, ShieldCheck } from 'lucide-react'
 import Seo from '@/components/seo'
-import { Footer } from '@/components/landing/footer'
-import { VeilLogo } from '@/components/landing/veil-logo'
-import ThemeToggle from '@/components/ui/theme-toggle'
-import { BASE_PATH } from '@/constants/routes'
+import EditorialShell from '@/components/layout/editorial-shell'
+import { PRIVACY_POLICY_PATH, TERM_OF_SERVICE_PATH } from '@/constants/routes'
+import { SUPPORT_EMAIL } from '@/content/site'
 import { renderLegalMarkdown } from '@/lib/legal-markdown'
 
 type Props = {
@@ -17,53 +17,129 @@ type Props = {
   content: string
 }
 
-/** Shared shell for the two legal pages: same header, same typography, same
- *  plain-English summary card above the formal text. */
+/** Presentation only: the original legal copy and effective dates remain the source of truth. */
 export default function LegalLayout({ title, description, path, lastUpdated, summary, content }: Props) {
+  const privacy = path === PRIVACY_POLICY_PATH
+  const Icon = privacy ? ShieldCheck : FileText
+  const blocks = content.trim().split(/(?=^### )/m)
+  const introduction = blocks.filter((block) => !block.startsWith('### ')).join('\n')
+  const sections = blocks
+    .filter((block) => block.startsWith('### '))
+    .map((block, index) => {
+      const newline = block.indexOf('\n')
+      return { id: `section-${index + 1}`, title: block.slice(4, newline), body: block.slice(newline + 1) }
+    })
+  const [active, setActive] = useState('section-1')
+
   useEffect(() => {
-    window.scrollTo(0, 0)
-  }, [])
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) if (entry.isIntersecting) setActive(entry.target.id)
+      },
+      { rootMargin: '-10% 0px -65% 0px' },
+    )
+    document.querySelectorAll('.legal-document-section').forEach((section) => observer.observe(section))
+    return () => observer.disconnect()
+  }, [content])
 
   return (
     <>
       <Seo title={`${title} — Veil`} description={description} path={path} />
-
-      <div className="relative overflow-hidden">
-        <div className="veil-aurora pointer-events-none absolute inset-x-0 top-0 h-96 opacity-70" aria-hidden="true" />
-
-        <div className="relative mx-auto max-w-3xl px-4 pt-10 pb-16 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between">
-            <Link
-              to={BASE_PATH}
-              className="veil-card veil-card-interactive inline-flex items-center gap-2 rounded-xl px-3 py-2 text-xs font-medium text-gray-700 transition-all dark:text-gray-300"
-            >
-              <ArrowLeft className="h-3.5 w-3.5" />
-              Back to Veil
-            </Link>
-            <ThemeToggle />
+      <EditorialShell className="legal-site">
+        <main tabIndex={-1} id="main-content">
+          <motion.header
+            className="legal-hero editorial-section"
+            initial={{ opacity: 0, y: 25 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+          >
+            <div className="section-marker">
+              <span>{privacy ? '01 / YOUR PRIVACY' : '02 / OUR AGREEMENT'}</span>
+              <span>TRUST STARTS WITH THE DETAILS.</span>
+            </div>
+            <div className="legal-hero-grid">
+              <div>
+                <span className="eyebrow">
+                  {privacy ? 'YOUR DATA. YOUR CONFIDENCE.' : 'A SHARED SPACE. A SHARED UNDERSTANDING.'}
+                </span>
+                <h1>
+                  {title}
+                  <span>{privacy ? 'Nothing left in the dark.' : 'On the same page.'}</span>
+                </h1>
+              </div>
+              <div className="legal-document-stamp">
+                <Icon size={32} strokeWidth={1.2} />
+                <span>VEIL / {privacy ? 'PRIVACY' : 'TERMS'}</span>
+                <strong>Last updated</strong>
+                <time>{lastUpdated}</time>
+              </div>
+            </div>
+            <div className="legal-hero-bottom">
+              <a href="#legal-summary" className="text-link">
+                Start with the short version <ArrowDown size={15} />
+              </a>
+              <Link to={privacy ? TERM_OF_SERVICE_PATH : PRIVACY_POLICY_PATH} className="text-link">
+                {privacy ? 'Terms of Service' : 'Privacy Notice'} <ArrowUpRight size={15} />
+              </Link>
+            </div>
+          </motion.header>
+          <div className="legal-reading-layout editorial-section">
+            <aside className="legal-contents">
+              <span className="eyebrow">IN THIS DOCUMENT</span>
+              <nav aria-label={`${title} contents`}>
+                {sections.map((section) => (
+                  <a
+                    key={section.id}
+                    href={`#${section.id}`}
+                    aria-current={active === section.id ? 'location' : undefined}
+                  >
+                    {section.title}
+                  </a>
+                ))}
+              </nav>
+              <a className="text-link" href={`mailto:${SUPPORT_EMAIL}`}>
+                Talk to a person <ArrowUpRight size={14} />
+              </a>
+            </aside>
+            <div className="legal-reading-main">
+              <motion.section
+                className="legal-summary"
+                id="legal-summary"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.65 }}
+              >
+                <span className="eyebrow">A MOMENT FOR THE ESSENTIALS</span>
+                <h2>The short version.</h2>
+                <div>{summary}</div>
+                <p className="legal-summary-note">
+                  This summary is here to be readable. The full text below is what actually applies.
+                </p>
+              </motion.section>
+              <article className="legal-document" aria-label={`Full ${title}`}>
+                {introduction && <div className="legal-introduction">{renderLegalMarkdown(introduction)}</div>}
+                {sections.map((section) => (
+                  <section className="legal-document-section" key={section.id} id={section.id}>
+                    <h2>{section.title}</h2>
+                    {renderLegalMarkdown(section.body)}
+                  </section>
+                ))}
+              </article>
+              <div className="legal-endnote">
+                <Icon size={22} />
+                <div>
+                  <h2>{privacy ? 'Your trust is personal.' : 'Good work starts with understanding.'}</h2>
+                  <p>Questions about this document? A person reads your email.</p>
+                  <a className="text-link" href={`mailto:${SUPPORT_EMAIL}`}>
+                    {SUPPORT_EMAIL} <ArrowUpRight size={14} />
+                  </a>
+                </div>
+              </div>
+            </div>
           </div>
-
-          <header className="mt-10 text-center">
-            <VeilLogo className="text-primary-500 mx-auto h-9 w-9" color="currentColor" />
-            <h1 className="mt-5 text-3xl font-bold text-balance text-gray-900 sm:text-4xl dark:text-white">{title}</h1>
-            <p className="veil-chip mt-4 inline-block px-3 py-1.5 text-xs text-gray-600 dark:text-gray-400">
-              Last updated {lastUpdated}
-            </p>
-          </header>
-
-          <div className="veil-well mt-10 rounded-2xl p-6">
-            <h2 className="text-sm font-bold text-gray-900 dark:text-white">The short version</h2>
-            <div className="mt-3 space-y-2 text-sm leading-relaxed text-gray-600 dark:text-gray-400">{summary}</div>
-            <p className="mt-4 text-xs text-gray-500">
-              This summary is here to be readable. The full text below is what actually applies.
-            </p>
-          </div>
-
-          <article className="veil-card mt-4 p-6 sm:p-8">{renderLegalMarkdown(content)}</article>
-        </div>
-      </div>
-
-      <Footer />
+        </main>
+      </EditorialShell>
     </>
   )
 }

@@ -1,0 +1,279 @@
+/* Scoped to illustrative product UI. Source: veil@30602b0. */
+.app-preview {
+  --font-sans: 'Noto Sans', sans-serif;
+
+  /* Default accent is a refined vermilion (朱) — the restrained heritage accent that sits on a monochrome, washi-and-sumi base. */
+  --color-primary-50: #fbf3ef;
+  --color-primary-100: #f7e2d9;
+  --color-primary-200: #eec4b3;
+  --color-primary-300: #e39f83;
+  --color-primary-400: #d76f4d;
+  --color-primary-500: #c94b2c;
+  --color-primary-600: #ae3821;
+  --color-primary-700: #8f2f1d;
+  --color-primary-800: #752a1d;
+  --color-primary-900: #62251c;
+  --color-primary-950: #350e08;
+
+  --color-secondary-50: #fdf9ef;
+  --color-secondary-100: #faf1da;
+  --color-secondary-200: #f2dcad;
+  --color-secondary-300: #ebc986;
+  --color-secondary-400: #e3a954;
+  --color-secondary-500: #dc9133;
+  --color-secondary-600: #ce7928;
+  --color-secondary-700: #ab5f23;
+  --color-secondary-800: #894c23;
+  --color-secondary-900: #6e3f20;
+  --color-secondary-950: #3b1e0f;
+
+  --color-accent-50: #f6f7f9;
+  --color-accent-100: #ebeef3;
+  --color-accent-200: #d3dae4;
+  --color-accent-300: #acbacd;
+  --color-accent-400: #7f95b1;
+  --color-accent-500: #5f7798;
+  --color-accent-600: #4b607f;
+  --color-accent-700: #3d4d67;
+  --color-accent-800: #354257;
+  --color-accent-900: #30394a;
+  --color-accent-950: #202631;
+
+  --color-gray-50: #f5f5f3;
+  --color-gray-100: #ececea;
+  --color-gray-200: #dddddb;
+  --color-gray-300: #c9c9c7;
+  --color-gray-400: #a8a6a0;
+  --color-gray-500: #83827b;
+  --color-gray-600: #67645d;
+  --color-gray-700: #4f4c45;
+  --color-gray-800: #312f2b;
+  --color-gray-900: #242320;
+  --color-gray-950: #1a1917;
+
+  --color-background: #131312;
+
+  --color-success: #5d7f6a;
+  --color-warning: #b98a32;
+  --color-error: #c3544f;
+  --color-info: #6d86b8;
+
+  --font-size-base: 0.875rem;
+  --icon-scale: 1;
+  --ui-density: 0.75rem;
+  --message-spacing: 0.5rem;
+  --radius-default: 0.25rem;
+  --skeuo-highlight: rgba(255, 255, 255, 0.7);
+  --skeuo-highlight-strong: rgba(255, 255, 255, 0.92);
+  --skeuo-shade-soft: rgba(15, 13, 10, 0.055);
+  --skeuo-shade: rgba(15, 13, 10, 0.12);
+  --skeuo-shade-strong: rgba(15, 13, 10, 0.2);
+  --skeuo-border: rgba(15, 13, 10, 0.17);
+}
+.dark .app-preview {
+  /* Restore the overridden grays (paper 50–300, type 400–600) to their
+     pre-change values so dark mode renders exactly as before — only light mode
+     gets the slightly darker paper and stronger type tones. */
+  --color-gray-50: #fbfaf8;
+  --color-gray-100: #f5f4f0;
+  --color-gray-200: #e9e7e0;
+  --color-gray-300: #d8d5cc;
+  --color-gray-400: #b6b1a6;
+  --color-gray-500: #938e83;
+  --color-gray-600: #726e64;
+
+  --skeuo-highlight: rgba(255, 255, 255, 0.055);
+  --skeuo-highlight-strong: rgba(255, 255, 255, 0.11);
+  --skeuo-shade-soft: rgba(0, 0, 0, 0.28);
+  --skeuo-shade: rgba(0, 0, 0, 0.42);
+  --skeuo-shade-strong: rgba(0, 0, 0, 0.6);
+  --skeuo-border: rgba(0, 0, 0, 0.45);
+}
+.app-preview.skeuo-raised,
+.app-preview .skeuo-raised {
+  box-shadow:
+    inset 0 1px 0 var(--skeuo-highlight),
+    0 1px 2px var(--skeuo-shade-soft);
+}
+.app-preview.skeuo-pressed,
+.app-preview .skeuo-pressed {
+  box-shadow:
+    inset 0 1px 3px var(--skeuo-shade),
+    inset 0 -1px 0 var(--skeuo-highlight);
+}
+.app-preview.skeuo-inset,
+.app-preview .skeuo-inset {
+  box-shadow:
+    inset 0 1px 2px var(--skeuo-shade-soft),
+    0 1px 0 var(--skeuo-highlight);
+}
+.app-preview.skeuo-tray,
+.app-preview .skeuo-tray {
+  box-shadow:
+    inset 0 1px 3px var(--skeuo-shade-soft),
+    inset 0 -1px 0 var(--skeuo-highlight-strong);
+}
+.app-preview.skeuo-plate,
+.app-preview .skeuo-plate {
+  box-shadow:
+    0 10px 28px -8px var(--skeuo-shade),
+    inset 0 1px 0 var(--skeuo-highlight);
+}
+.app-preview.skeuo-header,
+.app-preview .skeuo-header {
+  box-shadow:
+    0 1px 2px var(--skeuo-shade-soft),
+    inset 0 1px 0 var(--skeuo-highlight);
+}
+
+.app-preview.veil-card {
+  background: var(--color-gray-100);
+  background-image: none;
+  border-radius: 4px;
+  border-color: var(--skeuo-border);
+  padding: 0;
+  color: var(--color-gray-900);
+}
+.dark .app-preview.veil-card {
+  background: var(--color-gray-950);
+  color: var(--color-gray-100);
+}
+.app-preview .preview-menubar {
+  height: 32px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 0 12px;
+  border-bottom: 1px solid var(--skeuo-border);
+  background: var(--color-gray-100);
+}
+.dark .app-preview .preview-menubar {
+  background: var(--color-gray-900);
+}
+.app-preview .preview-search {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 48%;
+  margin: 0 auto;
+  font-size: 10px;
+  padding: 3px 7px;
+  border: 1px solid var(--skeuo-border);
+  border-radius: 4px;
+  background: var(--color-gray-100);
+  color: var(--color-gray-600);
+}
+.dark .app-preview .preview-search {
+  background: var(--color-gray-800);
+  color: var(--color-gray-400);
+}
+.app-preview .preview-toolbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--color-gray-500);
+}
+.app-preview .preview-toolbar-actions > span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 25px;
+  height: 25px;
+  border-radius: 4px;
+}
+.app-preview .preview-actions-label {
+  font-size: 10px;
+}
+.app-preview .preview-primary-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 6px 8px;
+  border-radius: 4px;
+  background: var(--color-primary-600);
+  border: 1px solid var(--color-primary-700);
+  color: #fff;
+  font-size: 10px;
+  white-space: nowrap;
+}
+.app-preview .preview-tool-tray {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: 2px;
+  border: 1px solid var(--skeuo-border);
+  border-radius: 4px;
+  background: var(--color-gray-100);
+}
+.dark .app-preview .preview-tool-tray {
+  background: var(--color-gray-950);
+}
+.app-preview .preview-tool-tray > span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  padding: 5px 7px;
+  border-radius: 4px;
+  font-size: 10px;
+}
+.app-preview .preview-tool-selected {
+  background: var(--color-gray-200);
+}
+.dark .app-preview .preview-tool-selected {
+  background: var(--color-gray-800);
+}
+.app-preview .preview-question-card {
+  background: var(--color-gray-50);
+}
+.dark .app-preview .preview-question-card {
+  background: var(--color-gray-800);
+}
+.app-preview .preview-board-tools {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+}
+.app-preview .preview-board-tools > span {
+  padding: 5px;
+}
+.app-preview .preview-column {
+  min-width: 100px;
+}
+.app-preview .preview-profile {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-top: 1px solid var(--skeuo-border);
+  padding: 8px;
+  margin-top: auto;
+}
+.app-preview .preview-canvas {
+  container-type: inline-size;
+}
+@container (max-width: 410px) {
+  .preview-secondary-action {
+    display: none !important;
+  }
+  .preview-actions-label {
+    display: none;
+  }
+}
+@media (max-width: 480px) {
+  .app-preview .preview-search {
+    width: 60%;
+  }
+  .app-preview .preview-secondary-action {
+    display: none !important;
+  }
+  .app-preview .preview-primary-action {
+    padding: 6px;
+  }
+  .app-preview .preview-actions-label {
+    display: none;
+  }
+}
