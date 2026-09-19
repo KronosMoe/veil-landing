@@ -23,14 +23,14 @@ const baseStyles = `
 `
 
 const sizeStyles: Record<ButtonSize, string> = {
-  sm: 'rounded-lg px-3 py-1.5 text-sm',
-  md: 'rounded-lg px-4 py-2 text-sm',
-  lg: 'rounded-xl px-5 py-2.5 text-base',
-  xl: 'rounded-xl px-6 py-3 text-base sm:text-lg',
+  sm: 'rounded-sm px-3 py-1.5 text-sm',
+  md: 'rounded-sm px-4 py-2 text-sm',
+  lg: 'rounded-sm px-5 py-2.5 text-base',
+  xl: 'rounded-sm px-6 py-3 text-base sm:text-lg',
 }
 
 const raisedBase = `
-  skeuo-raised border border-black/20 bg-gradient-to-b dark:border-black/60
+  skeuo-raised border border-black/15 dark:border-black/40
   active:skeuo-pressed active:translate-y-px
 `
 
@@ -49,22 +49,22 @@ const blendBase = `
 
 const raisedColors: Record<ButtonColor, string> = {
   primary:
-    'from-primary-400 to-primary-600 text-white hover:from-primary-300 hover:to-primary-500 active:from-primary-600 active:to-primary-500',
+    'bg-primary-600 text-white hover:bg-primary-500 active:bg-primary-700 dark:bg-primary-700 dark:hover:bg-primary-600 dark:active:bg-primary-800',
   secondary:
-    'from-gray-50 to-gray-200 text-gray-800 hover:from-white hover:to-gray-100 dark:from-gray-800 dark:to-gray-950 dark:text-gray-200 dark:hover:from-gray-700 dark:hover:to-gray-900',
-  error: 'from-[#e0555a] to-[#b03a3e] text-white hover:from-[#ec6a6e] hover:to-[#c4474b]',
-  warning: 'from-[#e5ab52] to-[#b3792a] text-white hover:from-[#f2ba62] hover:to-[#c48735]',
-  success: 'from-[#5dbb7e] to-[#3a8a58] text-white hover:from-[#6dcb8e] hover:to-[#459863]',
-  info: 'from-[#6c8cdb] to-[#4463b0] text-white hover:from-[#7e9be5] hover:to-[#5070c0]',
+    'bg-gray-200 text-gray-700 hover:bg-gray-300 active:bg-gray-200 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700 dark:active:bg-gray-800',
+  error: 'bg-error text-white hover:brightness-110 active:brightness-95',
+  warning: 'bg-warning text-white hover:brightness-110 active:brightness-95',
+  success: 'bg-success text-white hover:brightness-110 active:brightness-95',
+  info: 'bg-info text-white hover:brightness-110 active:brightness-95',
 }
 
 const mutedColors: Record<ButtonColor, string> = {
   primary: 'text-primary-600 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300',
   secondary: 'text-gray-700 hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-100',
-  error: 'text-[#b03a3e] hover:text-[#c4474b] dark:text-[#e0555a] dark:hover:text-[#ec6a6e]',
-  warning: 'text-[#b3792a] hover:text-[#c48735] dark:text-[#e5ab52] dark:hover:text-[#f2ba62]',
-  success: 'text-[#3a8a58] hover:text-[#459863] dark:text-[#5dbb7e] dark:hover:text-[#6dcb8e]',
-  info: 'text-[#4463b0] hover:text-[#5070c0] dark:text-[#6c8cdb] dark:hover:text-[#7e9be5]',
+  error: 'text-error hover:text-error',
+  warning: 'text-warning hover:text-warning',
+  success: 'text-success hover:text-success',
+  info: 'text-info hover:text-info',
 }
 
 const linkColors: Record<ButtonColor, string> = {

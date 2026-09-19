@@ -37,7 +37,7 @@ export function Features() {
         <div className="mx-auto mt-10 h-px w-24 overflow-hidden rounded-full bg-black/10 dark:bg-white/10">
           <motion.div
             style={shouldReduceMotion ? { scaleX: 1 } : { scaleX: railScale }}
-            className="from-primary-500 to-secondary-500 h-full origin-left bg-gradient-to-r"
+            className="bg-primary-600 h-full origin-left"
           />
         </div>
 

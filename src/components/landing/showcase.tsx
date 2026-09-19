@@ -88,7 +88,7 @@ function StepLabel({ scene, progress, index }: { scene: ShowcaseScene; progress:
       <span className="hidden text-xs font-semibold whitespace-nowrap sm:inline">{scene.label}</span>
       <motion.span
         style={{ scaleX }}
-        className="from-primary-500 to-secondary-500 absolute inset-x-0 bottom-0 h-0.5 origin-left rounded-full bg-gradient-to-r"
+        className="bg-primary-600 absolute inset-x-0 bottom-0 h-0.5 origin-left rounded-full"
       />
     </motion.span>
   )

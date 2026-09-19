@@ -16,39 +16,46 @@
    skeuo-* utilities below stay theme-aware without any dark: duplication.
    Never hand-write an rgba() shadow in a component — change a token. */
 :root {
-  --skeuo-highlight: rgba(255, 255, 255, 0.6);
-  --skeuo-highlight-strong: rgba(255, 255, 255, 0.8);
-  --skeuo-shade-soft: rgba(0, 0, 0, 0.08);
-  --skeuo-shade: rgba(0, 0, 0, 0.15);
-  --skeuo-shade-strong: rgba(0, 0, 0, 0.35);
-  --skeuo-border: rgba(0, 0, 0, 0.2);
+  --radius-default: 0.25rem;
+  --skeuo-highlight: rgba(255, 255, 255, 0.7);
+  --skeuo-highlight-strong: rgba(255, 255, 255, 0.92);
+  --skeuo-shade-soft: rgba(15, 13, 10, 0.055);
+  --skeuo-shade: rgba(15, 13, 10, 0.12);
+  --skeuo-shade-strong: rgba(15, 13, 10, 0.2);
+  --skeuo-border: rgba(15, 13, 10, 0.17);
 
-  /* Composite surfaces, per theme. Faces are gradients so every panel has a
-     light source at the top edge — the core of the skeuomorphic look. */
-  --surface-page: #f1f1f1;
-  --surface-card: linear-gradient(180deg, #ffffff 0%, #ededed 100%);
-  --surface-card-hover: linear-gradient(180deg, #ffffff 0%, #f6f6f6 100%);
-  --surface-well: linear-gradient(180deg, #e7e7e7 0%, #f3f3f3 100%);
-  --surface-bar: linear-gradient(180deg, rgba(255, 255, 255, 0.92) 0%, rgba(240, 240, 240, 0.86) 100%);
-  --glow-warm: rgba(243, 112, 30, 0.22);
+  --surface-page: var(--color-gray-100);
+  --surface-card: var(--color-gray-50);
+  --surface-card-hover: var(--color-gray-100);
+  --surface-well: var(--color-gray-200);
+  --surface-bar: rgba(245, 245, 243, 0.92);
+  --glow-warm: rgba(201, 75, 44, 0.16);
   --glow-cool: rgba(95, 119, 152, 0.16);
   --hairline: rgba(255, 255, 255, 0.7);
 }
 
 .dark {
-  --skeuo-highlight: rgba(255, 255, 255, 0.08);
-  --skeuo-highlight-strong: rgba(255, 255, 255, 0.15);
-  --skeuo-shade-soft: rgba(0, 0, 0, 0.3);
-  --skeuo-shade: rgba(0, 0, 0, 0.45);
-  --skeuo-shade-strong: rgba(0, 0, 0, 0.7);
-  --skeuo-border: rgba(0, 0, 0, 0.6);
+  --color-gray-50: #fbfaf8;
+  --color-gray-100: #f5f4f0;
+  --color-gray-200: #e9e7e0;
+  --color-gray-300: #d8d5cc;
+  --color-gray-400: #b6b1a6;
+  --color-gray-500: #938e83;
+  --color-gray-600: #726e64;
 
-  --surface-page: #111111;
-  --surface-card: linear-gradient(180deg, #2a2a2a 0%, #191919 100%);
-  --surface-card-hover: linear-gradient(180deg, #303030 0%, #1d1d1d 100%);
-  --surface-well: linear-gradient(180deg, #151515 0%, #1f1f1f 100%);
-  --surface-bar: linear-gradient(180deg, rgba(34, 34, 34, 0.88) 0%, rgba(17, 17, 17, 0.82) 100%);
-  --glow-warm: rgba(243, 112, 30, 0.18);
+  --skeuo-highlight: rgba(255, 255, 255, 0.055);
+  --skeuo-highlight-strong: rgba(255, 255, 255, 0.11);
+  --skeuo-shade-soft: rgba(0, 0, 0, 0.28);
+  --skeuo-shade: rgba(0, 0, 0, 0.42);
+  --skeuo-shade-strong: rgba(0, 0, 0, 0.6);
+  --skeuo-border: rgba(0, 0, 0, 0.45);
+
+  --surface-page: var(--color-background);
+  --surface-card: var(--color-gray-900);
+  --surface-card-hover: var(--color-gray-800);
+  --surface-well: var(--color-gray-950);
+  --surface-bar: rgba(36, 35, 32, 0.9);
+  --glow-warm: rgba(201, 75, 44, 0.14);
   --glow-cool: rgba(95, 119, 152, 0.14);
   --hairline: rgba(255, 255, 255, 0.06);
 }
@@ -57,41 +64,41 @@
 @utility skeuo-raised {
   box-shadow:
     inset 0 1px 0 var(--skeuo-highlight),
-    inset 0 -2px 3px var(--skeuo-shade-soft),
-    0 2px 4px var(--skeuo-shade);
+    0 1px 2px var(--skeuo-shade-soft);
 }
 
 /* Forward control while pressed */
 @utility skeuo-pressed {
   box-shadow:
-    inset 0 2px 5px var(--skeuo-shade),
-    inset 0 -1px 0 var(--skeuo-highlight),
-    0 1px 1px var(--skeuo-shade-soft);
+    inset 0 1px 3px var(--skeuo-shade),
+    inset 0 -1px 0 var(--skeuo-highlight);
 }
 
 /* Backward: recessed well (inputs, selected states) */
 @utility skeuo-inset {
   box-shadow:
-    inset 0 2px 4px var(--skeuo-shade-soft),
+    inset 0 1px 2px var(--skeuo-shade-soft),
     0 1px 0 var(--skeuo-highlight);
 }
 
 /* Deep recessed tray */
 @utility skeuo-tray {
-  box-shadow: inset 0 2px 5px var(--skeuo-shade);
+  box-shadow:
+    inset 0 1px 3px var(--skeuo-shade-soft),
+    inset 0 -1px 0 var(--skeuo-highlight-strong);
 }
 
 /* Floating plate (cards, popovers) */
 @utility skeuo-plate {
   box-shadow:
-    0 12px 32px -10px var(--skeuo-shade-strong),
+    0 10px 28px -8px var(--skeuo-shade),
     inset 0 1px 0 var(--skeuo-highlight);
 }
 
 /* Raised bar casting downward (headers) */
 @utility skeuo-header {
   box-shadow:
-    0 4px 10px -4px var(--skeuo-shade),
+    0 1px 2px var(--skeuo-shade-soft),
     inset 0 1px 0 var(--skeuo-highlight);
 }
 
@@ -216,19 +223,18 @@ body {
 }
 
 @layer components {
-  /* Raised panel with a gradient face — the workhorse surface of the page. */
+  /* Raised panel — the workhorse surface of the page. */
   .veil-card {
-    background-image: var(--surface-card);
+    background: var(--surface-card);
     border: 1px solid var(--skeuo-border);
-    border-radius: 1rem;
+    border-radius: var(--radius-default);
     box-shadow:
       inset 0 1px 0 var(--skeuo-highlight),
-      inset 0 -2px 3px var(--skeuo-shade-soft),
-      0 2px 4px var(--skeuo-shade);
+      0 1px 2px var(--skeuo-shade-soft);
   }
 
   .veil-card-interactive:hover {
-    background-image: var(--surface-card-hover);
+    background: var(--surface-card-hover);
     box-shadow:
       inset 0 1px 0 var(--skeuo-highlight-strong),
       0 10px 24px -12px var(--skeuo-shade-strong);
@@ -236,27 +242,27 @@ body {
 
   /* Recessed well — used for insets inside a card, and for the FAQ tray. */
   .veil-well {
-    background-image: var(--surface-well);
+    background: var(--surface-well);
     border: 1px solid var(--skeuo-border);
-    border-radius: 1rem;
+    border-radius: var(--radius-default);
     box-shadow:
-      inset 0 2px 5px var(--skeuo-shade),
-      0 1px 0 var(--skeuo-highlight);
+      inset 0 1px 3px var(--skeuo-shade-soft),
+      inset 0 -1px 0 var(--skeuo-highlight-strong);
   }
 
   /* Translucent raised bar for the sticky header. */
   .veil-bar {
-    background-image: var(--surface-bar);
+    background: var(--surface-bar);
     border-bottom: 1px solid var(--skeuo-border);
     box-shadow:
-      0 4px 10px -4px var(--skeuo-shade),
+      0 1px 2px var(--skeuo-shade-soft),
       inset 0 1px 0 var(--skeuo-highlight);
     backdrop-filter: blur(16px);
   }
 
   /* Small pill used for eyebrows and trust badges. */
   .veil-chip {
-    background-image: var(--surface-card);
+    background: var(--surface-card);
     border: 1px solid var(--skeuo-border);
     border-radius: 9999px;
     box-shadow:
@@ -282,9 +288,7 @@ body {
   }
 
   .veil-gradient-text {
-    background-image: linear-gradient(135deg, var(--color-primary-500) 0%, var(--color-secondary-500) 100%);
-    background-clip: text;
-    color: transparent;
+    color: var(--color-primary-600);
   }
 }
 
