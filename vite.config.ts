@@ -5,7 +5,6 @@ import tsconfigPaths from 'vite-tsconfig-paths'
 import path from 'path'
 import type { PluginOption } from 'vite'
 import tailwindcss from '@tailwindcss/vite'
-import { nodePolyfills } from 'vite-plugin-node-polyfills'
 
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd())
@@ -13,15 +12,17 @@ export default defineConfig(({ mode }) => {
 
   return {
     optimizeDeps: {},
-    build: {},
+    build: {
+      rollupOptions: {
+        output: {
+          manualChunks: {
+            react: ['react', 'react-dom', 'react-router-dom'],
+          },
+        },
+      },
+    },
     base: '/',
-    plugins: [
-      react(),
-      eslint({ fix: true }) as PluginOption,
-      tsconfigPaths(),
-      tailwindcss(),
-      nodePolyfills(),
-    ],
+    plugins: [react(), eslint({ fix: true }) as PluginOption, tsconfigPaths(), tailwindcss()],
     resolve: {
       alias: {
         '@': path.resolve(__dirname, './src'),

@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom'
-import { motion, useReducedMotion } from 'framer-motion'
 import { ArrowLeft, ArrowUpRight } from 'lucide-react'
 import Seo from '@/components/seo'
 import EditorialShell from '@/components/layout/editorial-shell'
@@ -8,7 +7,6 @@ import { BASE_PATH } from '@/constants/routes'
 import { SUPPORT_EMAIL } from '@/content/site'
 
 export default function NotFound() {
-  const reduced = useReducedMotion()
   return (
     <>
       <Seo
@@ -24,41 +22,18 @@ export default function NotFound() {
             <span>THERE’S STILL A PLACE FOR YOU.</span>
           </div>
           <div className="lost-scene" aria-hidden="true">
-            <motion.span
-              className="lost-digit"
-              initial={{ opacity: 0, y: 70, rotate: -12 }}
-              animate={{ opacity: 1, y: 0, rotate: -6 }}
-              transition={{ duration: 1 }}
-            >
-              4
-            </motion.span>
+            <span className="lost-digit lost-digit-left">4</span>
             <div className="lost-portal">
               <span className="lost-orbit" />
               <span className="lost-orbit second" />
-              <motion.div
-                className="lost-mascot"
-                animate={reduced ? {} : { y: [0, -17, 0], rotate: [-6, 6, -6] }}
-                transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
-              >
+              <div className="lost-mascot">
                 <VeilLogo />
-              </motion.div>
+              </div>
               <span className="lost-coordinate">SOMEWHERE, TOGETHER.</span>
             </div>
-            <motion.span
-              className="lost-digit"
-              initial={{ opacity: 0, y: 70, rotate: 12 }}
-              animate={{ opacity: 1, y: 0, rotate: 6 }}
-              transition={{ duration: 1, delay: 0.12 }}
-            >
-              4
-            </motion.span>
+            <span className="lost-digit lost-digit-right">4</span>
           </div>
-          <motion.div
-            className="lost-copy"
-            initial={{ opacity: 0, y: 25 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: reduced ? 0 : 0.3 }}
-          >
+          <div className="lost-copy">
             <span className="eyebrow">THIS SPACE IS STILL A LITTLE EMPTY.</span>
             <h1>
               A little lost.
@@ -79,10 +54,10 @@ export default function NotFound() {
                 Let us know <ArrowUpRight size={15} />
               </a>
             </div>
-          </motion.div>
+          </div>
           <div className="lost-bottom">
             <span>NO WRONG TURNS. JUST ANOTHER WAY HOME.</span>
-            <Link to="/#showcase">
+            <Link to="/#experience">
               Explore the workspace <ArrowUpRight size={14} />
             </Link>
           </div>

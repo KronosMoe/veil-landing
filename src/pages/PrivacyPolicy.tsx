@@ -22,7 +22,7 @@ You can reach us about anything in this notice, including any request to exercis
 **Data generated as you use Veil**
 
 - Content you create — messages, file attachments, announcements, polls, Q&A posts and whiteboards — held in encrypted form as described in section 4
-- The workspaces, channels and conversations you belong to
+- The Spaces, channels and conversations you belong to
 - Authentication records, including timestamps and the IP address a sign-in came from
 - Technical data your browser transmits with each request, such as browser type and version
 - A push notification subscription, only where you have enabled notifications
@@ -35,7 +35,7 @@ We do not ask for your telephone number, your contact list, your identification 
 
 The PDPA requires a lawful basis for each purpose. Ours are:
 
-- **Performance of a contract (s.24(3))** — creating and maintaining your account, delivering your messages, operating workspaces and channels, and providing the service you signed up for.
+- **Performance of a contract (s.24(3))** — creating and maintaining your account, delivering your messages, operating Spaces and channels, and providing the service you signed up for.
 - **Legitimate interests (s.24(5))** — keeping the service secure and available, retaining authentication records to detect unauthorised access, preventing abuse, and diagnosing faults. We have weighed these against your rights and freedoms.
 - **Consent (s.19)** — push notifications, and any optional profile information you choose to provide. You may withdraw consent at any time under section 19 paragraph five, and withdrawal is as easy as giving it. Withdrawal does not affect processing carried out before it.
 - **Legal obligation (s.24(6))** — where Thai law requires us to retain or disclose data.
@@ -44,13 +44,17 @@ We do not use your personal data for advertising, profiling or automated decisio
 
 ### 4. How your content is protected
 
-Veil is **end-to-end encrypted**. Messages, file attachments, announcements, polls, Q&A posts and whiteboard scenes are encrypted with AES-256-GCM on your device before transmission, remain encrypted in transit, and are stored encrypted at rest. Direct messages use a key derived from an X25519 key exchange between you and your correspondent. Each channel holds a distinct key.
+Private conversations that display Veil's **end-to-end encrypted** badge use a per-device encryption model. The sender's device creates an encrypted message envelope for each registered recipient device using X3DH key agreement and a Double Ratchet session. Veil's messaging service stores and routes those encrypted envelopes rather than a readable message body.
 
-Attachments are encrypted before upload to object storage that we operate. Sensitive account fields — your two-factor secret, push subscription details and attachment filenames — are separately encrypted in the database.
+Attachments sent through those private conversations are encrypted before upload with a generated attachment key. That key is delivered to recipient devices inside encrypted message envelopes. A user may also create an optional PIN-protected encrypted archive for private-conversation history recovery on a new device.
+
+Space channels use a different model. Channel content is encrypted by the client with a shared symmetric channel key. In channel-encryption mode, Veil infrastructure may hold that shared key so the content does not have the same per-device end-to-end guarantee as a private conversation. We therefore do not describe all Space content as end-to-end encrypted.
+
+Sensitive account fields — your two-factor secret, push subscription details and attachment filenames — are separately encrypted in the database.
 
 Authentication is handled by Veil's own OpenID Connect provider, an industry-standard protocol, rather than credentials passed directly to the application.
 
-Voice and video calls are encrypted in transit and routed through a media server so participants remain synchronised. Calls are not recorded, transcribed or stored.
+Voice and video calls are encrypted in transit and routed through a media server so participants remain synchronised. Calls are not represented as using the private-message per-device envelope model.
 
 ### 5. Disclosure to third parties
 
@@ -79,7 +83,7 @@ None of this is used to profile you or to track you across other websites.
 
 ### 8. Retention
 
-We retain your content until you or your workspace deletes it. Authentication records are retained for a limited period for security purposes.
+We retain your content until you or your Space deletes it. Authentication records are retained for a limited period for security purposes.
 
 When you request deletion of your account, deletion is scheduled **fourteen days** ahead. Signing in during that period cancels it. After the period ends, your account and the personal data attached to it are erased. Your display name is retained in archived form so that messages you authored continue to show an author for other participants in those conversations.
 
@@ -124,7 +128,7 @@ export default function PrivacyPolicy() {
       title="Privacy Notice"
       description="How Veil collects and protects your personal data under Thailand's Personal Data Protection Act (PDPA) — lawful bases, retention, cross-border transfer, and how to exercise your rights."
       path={PRIVACY_POLICY_PATH}
-      lastUpdated="26 August 2026"
+      lastUpdated="21 September 2026"
       content={content}
       summary={
         <>
@@ -133,8 +137,8 @@ export default function PrivacyPolicy() {
             No phone number, no contacts, no legal name.
           </p>
           <p>
-            Veil is end-to-end encrypted. Your messages are sealed on your device before they are sent and stay
-            encrypted in transit and at rest.
+            Private conversations with the end-to-end encrypted badge are sealed into a separate envelope for each
+            recipient device. Space channels use shared channel keys, and calls are encrypted in transit.
           </p>
           <p>
             No ads, no analytics products, no trackers, and nothing sold to anyone. Under the PDPA you can access,

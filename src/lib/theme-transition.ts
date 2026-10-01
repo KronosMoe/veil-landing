@@ -6,6 +6,8 @@ let revision = 0
 export function transitionTheme(dark: boolean, reducedMotion = false, onApplied = () => {}) {
   const root = document.documentElement
   if (requestedTheme === dark || (requestedTheme === undefined && root.classList.contains('dark') === dark)) return
+  const scrollPosition = { left: window.scrollX, top: window.scrollY }
+  const restoreScroll = () => window.scrollTo({ ...scrollPosition, behavior: 'instant' })
   const current = ++revision
   active?.skipTransition()
   requestedTheme = dark
@@ -15,6 +17,7 @@ export function transitionTheme(dark: boolean, reducedMotion = false, onApplied 
     root.style.colorScheme = dark ? 'dark' : 'light'
     requestedTheme = undefined
     onApplied()
+    restoreScroll()
   }
   const cleanup = () => {
     if (current !== revision) return
@@ -34,7 +37,13 @@ export function transitionTheme(dark: boolean, reducedMotion = false, onApplied 
   try {
     active = document.startViewTransition(apply)
     void active.ready.catch(() => {})
-    void active.finished.then(cleanup, cleanup)
+    void active.finished.then(
+      () => {
+        restoreScroll()
+        cleanup()
+      },
+      cleanup,
+    )
   } catch {
     apply()
     cleanup()

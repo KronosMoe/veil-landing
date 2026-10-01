@@ -12,9 +12,9 @@ If you disagree with something here, the honest answer is not to use Veil — bu
 
 ### 2. What Veil is
 
-Veil is a communication service: workspaces containing text, voice, whiteboard, to-do, announcement and Q&A channels, plus direct and group messages, calls, and a personal space for files you choose to save. It runs in the browser, as an installed web app and as a desktop app for macOS, Windows and Linux.
+Veil is a communication service built around Spaces. A Space may hold text, voice, whiteboard, to-do, announcement and Q&A channels, and exposes only the ones it has turned on — so a Space may be a conversation between two people, a place for a team, or a personal working context. Keep is a separate personal collection for content you choose to save. Veil runs in the browser, as an installed web app and as a desktop app for macOS, Windows and Linux.
 
-Veil is free to use. Every workspace starts on the free plan, which carries every feature we ship today, with no trial that expires and nothing to enter a card for. A workspace owner may ask us for a Team or Enterprise licence, or run a self-hosted deployment under a licence that costs nothing. None of those licences is billable yet: no workspace can be charged today, and asking for one neither creates a payment obligation nor changes these terms.
+Veil is free to use. Every Space starts on the free plan, which carries every feature we ship today, with no trial that expires and nothing to enter a card for. A Space owner may ask us for a Team or Enterprise licence, or run a self-hosted deployment under a licence that costs nothing. None of those licences is billable yet: no Space can be charged today, and asking for one neither creates a payment obligation nor changes these terms.
 
 ### 3. Your account
 
@@ -26,13 +26,13 @@ Veil is free to use. Every workspace starts on the free plan, which carries ever
 
 ### 4. Account recovery
 
-Your conversations are tied to your account rather than to a particular device, so signing in somewhere new brings your history with you. The other side of that: if you lose access to your email **and** your two-factor method, there may be no way for us to give the account back. Keep your recovery options current.
+Your Veil account can be used on more than one device, but private-conversation cryptographic state belongs to each device. Earlier private-conversation history on a new device requires the optional PIN-protected archive backup. If no archive was created, Veil cannot reconstruct that encrypted history for the new device. If you lose access to your email **and** your two-factor method, there may also be no way for us to give the account back. Keep your recovery options current.
 
 ### 5. Your content stays yours
 
 You own what you write, draw and upload, and you keep whatever copyright you have in it under the **Copyright Act B.E. 2537 (1994)**. You give us only the limited, non-exclusive permission needed to run the service — to store your content, move it to the people you sent it to, and show it back to them. That permission ends when the content is deleted.
 
-Your content is end-to-end encrypted. We do not read your messages, mine them, train anything on them or hand them to advertisers. The Privacy Notice sets out how your personal data is handled under the **Personal Data Protection Act B.E. 2562 (2019)**.
+Private conversations that display the end-to-end encrypted badge use an encrypted envelope for each recipient device. Space channels use shared channel keys and do not carry the same per-device end-to-end guarantee. We do not use your content for advertising or model training. The Privacy Notice explains these encryption boundaries and how your personal data is handled under the **Personal Data Protection Act B.E. 2562 (2019)**.
 
 ### 6. What you may not do with Veil
 
@@ -48,11 +48,11 @@ Thai law applies to what you do here, in particular the **Computer Crime Act B.E
 - Scraping, load-testing or otherwise straining the service on purpose
 - Reselling Veil or passing it off as your own product
 
-### 7. Workspaces and moderation
+### 7. Spaces and moderation
 
-Whoever creates a workspace runs it: they decide who joins, who can see what, and what the rules are inside. Disputes within a workspace are for that workspace to settle.
+Whoever creates a Space runs it: they decide who joins, who can see what, and what the rules are inside. Disputes inside a Space are for that Space to settle.
 
-We step in where the rules above are broken. Because your content is end-to-end encrypted, our moderation works from reports and account-level signals rather than from reading conversations. When we act, it is usually on an account or a workspace, not on individual messages.
+We step in where the rules above are broken. Moderation works primarily from reports and account-level signals. The private-message service stores and routes encrypted per-device envelopes rather than a readable message body; Space channels have the different shared-key model described in the Privacy Notice. When we act, it is usually on an account or a Space, not on individual messages.
 
 Where a competent Thai authority makes a lawful order, we comply with it to the extent we are technically able.
 
@@ -93,7 +93,7 @@ export default function TermsOfService() {
       title="Terms of Service"
       description="The agreement between you and Veil, in plain English: what the service is, what your account is responsible for, what you may not do, and what we owe each other under Thai law."
       path={TERM_OF_SERVICE_PATH}
-      lastUpdated="28 August 2026"
+      lastUpdated="21 September 2026"
       content={content}
       summary={
         <>

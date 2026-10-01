@@ -1,6 +1,5 @@
-import { useEffect, useState, type ReactNode } from 'react'
+import { useEffect, useRef, useState, type ReactNode } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { motion, useScroll } from 'framer-motion'
 import { ArrowRight, ArrowUpRight, Menu, X } from 'lucide-react'
 import { APP_URL, SUPPORT_EMAIL } from '@/content/site'
 import { PRIVACY_POLICY_PATH, TERM_OF_SERVICE_PATH } from '@/constants/routes'
@@ -9,15 +8,26 @@ import { VeilLogo } from '../landing/veil-logo'
 
 export default function EditorialShell({ children, className = '' }: { children: ReactNode; className?: string }) {
   const [menuOpen, setMenuOpen] = useState(false)
+  const menuButton = useRef<HTMLButtonElement>(null)
+  useEffect(() => {
+    if (!menuOpen) return
+    function closeOnEscape(event: KeyboardEvent) {
+      if (event.key === 'Escape') {
+        setMenuOpen(false)
+        menuButton.current?.focus()
+      }
+    }
+    document.addEventListener('keydown', closeOnEscape)
+    return () => document.removeEventListener('keydown', closeOnEscape)
+  }, [menuOpen])
   const { pathname, hash } = useLocation()
-  const { scrollYProgress } = useScroll()
   useEffect(() => {
     if (hash) document.getElementById(hash.slice(1))?.scrollIntoView()
     else window.scrollTo(0, 0)
   }, [pathname, hash])
   return (
     <div className={`editorial-site ${className}`} id="top">
-      <motion.div className="reading-progress" style={{ scaleX: scrollYProgress }} aria-hidden="true" />
+      <div className="reading-progress" aria-hidden="true" />
       <a href="#main-content" className="skip-content">
         Skip to content
       </a>
@@ -25,8 +35,6 @@ export default function EditorialShell({ children, className = '' }: { children:
         <Link to="/" className="editorial-logo" aria-label="Veil home">
           <VeilLogo />
           <span>veil</span>
-          <span className="logo-divider" />
-          <small>A SPACE FOR YOUR PEOPLE</small>
         </Link>
         <nav
           className={menuOpen ? 'editorial-nav is-open' : 'editorial-nav'}
@@ -34,11 +42,11 @@ export default function EditorialShell({ children, className = '' }: { children:
           id="main-navigation"
         >
           {[
-            ['#features', 'Your group'],
-            ['#showcase', 'Chat to work'],
-            ['#security', 'Privacy'],
-            ['#pricing', 'Plans'],
-            ['#direction', 'What’s next'],
+            ['#space', 'Space'],
+            ['#experience', 'Workflow'],
+            ['#attention', 'Inbox'],
+            ['#discover', 'Discover'],
+            ['#privacy', 'Privacy'],
           ].map(([href, label]) => (
             <Link key={href} to={`/${href}`} onClick={() => setMenuOpen(false)}>
               {label}
@@ -51,6 +59,7 @@ export default function EditorialShell({ children, className = '' }: { children:
             Open Veil <ArrowUpRight size={17} />
           </a>
           <button
+            ref={menuButton}
             className="mobile-menu"
             aria-label={menuOpen ? 'Close navigation' : 'Open navigation'}
             aria-expanded={menuOpen}
@@ -67,7 +76,7 @@ export default function EditorialShell({ children, className = '' }: { children:
           <VeilLogo />
           <span>veil</span>
         </Link>
-        <p>© {new Date().getFullYear()} Veil. A space for your people.</p>
+        <p>© {new Date().getFullYear()} Veil. A place where you define how you work.</p>
         <div>
           <Link to={PRIVACY_POLICY_PATH}>Privacy</Link>
           <Link to={TERM_OF_SERVICE_PATH}>Terms</Link>

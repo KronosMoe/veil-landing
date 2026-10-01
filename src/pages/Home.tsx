@@ -1,15 +1,15 @@
 import Seo from '@/components/seo'
-import LandingExperience from '@/components/landing/landing-experience'
+import VeilLanding from '@/components/landing/veil-landing'
 
 export default function Home() {
   return (
     <>
       <Seo
-        title="Veil — Group chat that moves work forward"
-        description="Communication and coordination for small and medium-sized groups. Turn conversations into shared plans and tasks in a private Veil workspace."
+        title="Veil — A place where you define how you work."
+        description="Everything happens in a Space. Compose your conversations, meetings, ideas and shared work. Veil helps surface what deserves your attention."
         path="/"
       />
-      <LandingExperience />
+      <VeilLanding />
     </>
   )
 }
